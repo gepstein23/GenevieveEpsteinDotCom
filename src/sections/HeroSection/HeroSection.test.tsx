@@ -19,8 +19,8 @@ describe('HeroSection', () => {
   it('renders the profile photo with explicit dimensions', () => {
     render(<HeroSection />)
     const photo = screen.getByAltText('Genevieve Epstein')
-    expect(photo).toHaveAttribute('width', '180')
-    expect(photo).toHaveAttribute('height', '180')
+    expect(photo).toHaveAttribute('width', '220')
+    expect(photo).toHaveAttribute('height', '220')
   })
 
   it('renders the name as an h1 heading', () => {

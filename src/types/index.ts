@@ -33,6 +33,8 @@ export interface ExperienceItem {
 export interface Skill {
   name: string
   category: 'languages' | 'frameworks' | 'cloud' | 'tools'
+  /** When true, the skill tag gets a special glow/accent treatment. */
+  highlighted?: boolean
 }
 
 /** A social/external link (GitHub, LinkedIn, etc.). */

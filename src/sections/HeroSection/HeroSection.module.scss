@@ -70,15 +70,15 @@
 
 .photoFrame {
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   cursor: pointer;
   animation: photoEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 
   @include md {
-    width: 200px;
-    height: 200px;
+    width: 260px;
+    height: 260px;
   }
 
   /* Glow behind the frame */

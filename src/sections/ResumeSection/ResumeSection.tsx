@@ -64,6 +64,10 @@ export default function ResumeSection() {
             <AnimatedCounter end={51000} suffix="+" />
             <span className={styles.statLabel}>fraud accounts caught</span>
           </div>
+          <div className={styles.stat}>
+            <span className={styles.counter}>Millions</span>
+            <span className={styles.statLabel}>hours of potential fraud prevented</span>
+          </div>
         </div>
       </SectionReveal>
 
@@ -119,7 +123,7 @@ export default function ResumeSection() {
                         .map((skill) => (
                           <span
                             key={skill.name}
-                            className={styles.tag}
+                            className={`${styles.tag}${skill.highlighted ? ` ${styles.tagHighlighted}` : ''}`}
                             style={{ borderColor: cat.color }}
                           >
                             {skill.name}
@@ -157,7 +161,7 @@ export default function ResumeSection() {
                 <span className={styles.awardIcon}>&#9733;</span>
                 <div>
                   <p className={styles.awardTitle}>#1 Ranked Senior Software Engineer</p>
-                  <p className={styles.awardOrg}>FanDuel Trust &amp; Safety &middot; December 2025</p>
+                  <p className={styles.awardOrg}>FanDuel Trust &amp; Safety &middot; 2025</p>
                 </div>
               </div>
             </GlowCard>

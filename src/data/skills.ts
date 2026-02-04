@@ -9,14 +9,14 @@ import type { Skill } from '@/types'
 
 export const skills: Skill[] = [
   // Languages
-  { name: 'Java', category: 'languages' },
+  { name: 'Java', category: 'languages', highlighted: true },
   { name: 'Python', category: 'languages' },
   { name: 'TypeScript', category: 'languages' },
   { name: 'SQL', category: 'languages' },
   { name: 'C#', category: 'languages' },
   { name: 'C++', category: 'languages' },
   { name: 'Bash', category: 'languages' },
-  { name: 'Terraform', category: 'languages' },
+  { name: 'Terraform', category: 'languages', highlighted: true },
 
   // Frameworks & Libraries
   { name: 'Spring', category: 'frameworks' },
@@ -33,6 +33,7 @@ export const skills: Skill[] = [
   { name: 'AWS', category: 'cloud' },
   { name: 'EC2', category: 'cloud' },
   { name: 'Amplify', category: 'cloud' },
+  { name: 'Lambda', category: 'cloud' },
   { name: 'Docker', category: 'cloud' },
   { name: 'CI/CD', category: 'cloud' },
 
@@ -41,6 +42,5 @@ export const skills: Skill[] = [
   { name: 'PagerDuty', category: 'tools' },
   { name: 'Git', category: 'tools' },
   { name: 'IntelliJ', category: 'tools' },
-  { name: 'SCSS', category: 'tools' },
   { name: 'HTML/CSS', category: 'tools' },
 ]

@@ -1,5 +1,6 @@
+import { useState, useRef, useCallback } from 'react'
 import SectionReveal from '@/components/SectionReveal/SectionReveal'
-import MagneticButton from '@/components/MagneticButton/MagneticButton'
+import GlowCard from '@/components/GlowCard/GlowCard'
 import { socialLinks } from '@/data/socialLinks'
 import { siteConfig } from '@/data/siteConfig'
 import styles from './ContactSection.module.scss'
@@ -13,7 +14,55 @@ const iconPaths: Record<string, string> = {
     'M2 6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6zm2.5 0L12 11l7.5-5h-15zM4 8v10h16V8l-8 5.333L4 8z',
 }
 
+/** Rate-limit window in ms — one submission per 60 seconds */
+const RATE_LIMIT_MS = 60_000
+
 export default function ContactSection() {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+  const [status, setStatus] = useState<'idle' | 'sent' | 'rate-limited'>('idle')
+  const lastSubmitRef = useRef(0)
+  const mountTimeRef = useRef(Date.now())
+
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    },
+    [],
+  )
+
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+
+      // Honeypot check — bots fill the hidden field
+      const form = e.currentTarget
+      const honeypot = (form.elements.namedItem('website') as HTMLInputElement)?.value
+      if (honeypot) return
+
+      // Minimum time on page check (bots submit instantly)
+      if (Date.now() - mountTimeRef.current < 3000) return
+
+      // Rate limiting
+      const now = Date.now()
+      if (now - lastSubmitRef.current < RATE_LIMIT_MS) {
+        setStatus('rate-limited')
+        return
+      }
+      lastSubmitRef.current = now
+
+      // Construct mailto URL
+      const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`)
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
+      )
+      window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`
+
+      setStatus('sent')
+      setFormData({ name: '', email: '', message: '' })
+    },
+    [formData],
+  )
+
   return (
     <section id="contact" className={styles.contact}>
       <SectionReveal>
@@ -29,15 +78,85 @@ export default function ContactSection() {
         </p>
       </SectionReveal>
 
-      <SectionReveal delay={0.25}>
-        <div className={styles.cta}>
-          <MagneticButton
-            href={`mailto:${siteConfig.email}`}
-            variant="primary"
-          >
-            Say Hello
-          </MagneticButton>
-        </div>
+      <SectionReveal delay={0.2}>
+        <GlowCard className={styles.formCard}>
+          <form className={styles.form} onSubmit={handleSubmit} noValidate>
+            {/* Honeypot — hidden from real users, bots auto-fill it */}
+            <input
+              type="text"
+              name="website"
+              className={styles.honeypot}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
+
+            <div className={styles.fieldRow}>
+              <div className={styles.field}>
+                <label htmlFor="contact-name" className={styles.label}>
+                  Name
+                </label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className={styles.input}
+                  placeholder="Your name"
+                />
+              </div>
+
+              <div className={styles.field}>
+                <label htmlFor="contact-email" className={styles.label}>
+                  Email
+                </label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className={styles.input}
+                  placeholder="your@email.com"
+                />
+              </div>
+            </div>
+
+            <div className={styles.field}>
+              <label htmlFor="contact-message" className={styles.label}>
+                Message
+              </label>
+              <textarea
+                id="contact-message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                className={styles.textarea}
+                placeholder="What's on your mind?"
+                rows={5}
+              />
+            </div>
+
+            <button type="submit" className={styles.submitBtn}>
+              Send Message &rarr;
+            </button>
+
+            {status === 'sent' && (
+              <p className={styles.statusMsg}>
+                Opening your email client&hellip; Thanks for reaching out!
+              </p>
+            )}
+            {status === 'rate-limited' && (
+              <p className={styles.statusMsgError}>
+                Please wait a moment before sending another message.
+              </p>
+            )}
+          </form>
+        </GlowCard>
       </SectionReveal>
 
       <SectionReveal delay={0.35}>

@@ -31,8 +31,122 @@
   margin-bottom: var(--space-2xl);
 }
 
-.cta {
+/* Contact form */
+.formCard {
+  width: 100%;
+  max-width: 600px;
+  padding: var(--space-lg);
   margin-bottom: var(--space-3xl);
+  text-align: left;
+
+  @include md {
+    padding: var(--space-xl);
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  pointer-events: none;
+}
+
+.fieldRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+
+  @include md {
+    flex-direction: row;
+    gap: var(--space-md);
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-secondary);
+}
+
+.input,
+.textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-sm, 6px);
+  padding: var(--space-sm) var(--space-md);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  cursor: none;
+
+  &::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.5;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-accent-cyan);
+    box-shadow: 0 0 12px rgba(0, 245, 212, 0.15);
+  }
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submitBtn {
+  align-self: flex-start;
+  padding: var(--space-sm) var(--space-xl);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-bg-primary);
+  background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-purple));
+  border: none;
+  border-radius: var(--radius-sm, 6px);
+  cursor: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-base);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255, 0, 110, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.statusMsg {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-accent-cyan);
+}
+
+.statusMsgError {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-accent-pink);
 }
 
 .socials {

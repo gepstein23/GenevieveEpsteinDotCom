@@ -10,10 +10,12 @@ describe('ResumeSection', () => {
     expect(screen.getByText('Experience')).toBeInTheDocument()
   })
 
-  it('renders only the reqs/sec and fraud stats', () => {
+  it('renders the reqs/sec, fraud, and fraud prevention stats', () => {
     render(<ResumeSection />)
     expect(screen.getByText('reqs/sec handled')).toBeInTheDocument()
     expect(screen.getByText('fraud accounts caught')).toBeInTheDocument()
+    expect(screen.getByText('hours of potential fraud prevented')).toBeInTheDocument()
+    expect(screen.getByText('Millions')).toBeInTheDocument()
     // Removed stats should not appear
     expect(screen.queryByText('issues resolved')).not.toBeInTheDocument()
     expect(screen.queryByText('API endpoints shipped')).not.toBeInTheDocument()
@@ -66,13 +68,37 @@ describe('ResumeSection', () => {
     expect(screen.getByText('Rising Stars Program Award')).toBeInTheDocument()
   })
 
-  it('renders the #1 SSE award with Trust & Safety vertical and December 2025', () => {
+  it('renders the #1 SSE award with Trust & Safety vertical and 2025', () => {
     render(<ResumeSection />)
     expect(
       screen.getByText('#1 Ranked Senior Software Engineer'),
     ).toBeInTheDocument()
     const awardOrg = screen.getByText(/Trust & Safety/)
     expect(awardOrg).toBeInTheDocument()
-    expect(awardOrg.textContent).toContain('December 2025')
+    expect(awardOrg.textContent).toContain('2025')
+    // "December" was removed from the award
+    expect(awardOrg.textContent).not.toContain('December')
+  })
+
+  it('does not include SCSS in skills', () => {
+    render(<ResumeSection />)
+    expect(screen.queryByText('SCSS')).not.toBeInTheDocument()
+  })
+
+  it('includes Lambda in cloud skills', () => {
+    render(<ResumeSection />)
+    expect(screen.getByText('Lambda')).toBeInTheDocument()
+  })
+
+  it('highlights Java and Terraform with a special class', () => {
+    render(<ResumeSection />)
+    const javaTag = screen.getByText('Java')
+    const terraformTag = screen.getByText('Terraform')
+    // Both should have the highlighted class
+    expect(javaTag.className).toContain('tagHighlighted')
+    expect(terraformTag.className).toContain('tagHighlighted')
+    // A non-highlighted skill should not have it
+    const pythonTag = screen.getByText('Python')
+    expect(pythonTag.className).not.toContain('tagHighlighted')
   })
 })
