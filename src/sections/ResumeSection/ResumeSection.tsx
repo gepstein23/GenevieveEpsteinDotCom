@@ -8,9 +8,9 @@ import styles from './ResumeSection.module.scss'
 
 const categories = [
   { key: 'languages', label: 'Languages', color: 'var(--color-text-secondary)' },
-  { key: 'frontend', label: 'Frontend', color: 'var(--color-accent-pink)' },
-  { key: 'backend', label: 'Backend', color: 'var(--color-accent-purple)' },
-  { key: 'tools', label: 'Tools', color: 'var(--color-accent-cyan)' },
+  { key: 'frameworks', label: 'Frameworks & Libraries', color: 'var(--color-accent-purple)' },
+  { key: 'cloud', label: 'Cloud & Infrastructure', color: 'var(--color-accent-pink)' },
+  { key: 'tools', label: 'Tools & Observability', color: 'var(--color-accent-cyan)' },
 ] as const
 
 function AnimatedCounter({ end, suffix = '' }: { end: number; suffix?: string }) {
@@ -57,16 +57,12 @@ export default function ResumeSection() {
       <SectionReveal delay={0.1}>
         <div className={styles.stats}>
           <div className={styles.stat}>
+            <AnimatedCounter end={3000} suffix="+" />
+            <span className={styles.statLabel}>reqs/sec handled</span>
+          </div>
+          <div className={styles.stat}>
             <AnimatedCounter end={51000} suffix="+" />
             <span className={styles.statLabel}>fraud accounts caught</span>
-          </div>
-          <div className={styles.stat}>
-            <AnimatedCounter end={400} suffix="+" />
-            <span className={styles.statLabel}>issues resolved</span>
-          </div>
-          <div className={styles.stat}>
-            <AnimatedCounter end={10} suffix="+" />
-            <span className={styles.statLabel}>API endpoints shipped</span>
           </div>
         </div>
       </SectionReveal>
@@ -161,7 +157,7 @@ export default function ResumeSection() {
                 <span className={styles.awardIcon}>&#9733;</span>
                 <div>
                   <p className={styles.awardTitle}>#1 Ranked Senior Software Engineer</p>
-                  <p className={styles.awardOrg}>FanDuel Vertical &middot; 2025</p>
+                  <p className={styles.awardOrg}>FanDuel Trust &amp; Safety &middot; December 2025</p>
                 </div>
               </div>
             </GlowCard>

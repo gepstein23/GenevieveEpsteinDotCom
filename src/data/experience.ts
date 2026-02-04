@@ -54,13 +54,4 @@ export const experience: ExperienceItem[] = [
       'Full-time and part-time intern across multiple teams, contributing to core product development.',
     ],
   },
-  {
-    id: 'exp-5',
-    role: 'B.Sc. Computer Science',
-    company: 'Northeastern University, Khoury College',
-    period: 'Graduated Dec 2021',
-    description: [
-      'Concentration in Systems, Minor in Music.',
-    ],
-  },
 ]

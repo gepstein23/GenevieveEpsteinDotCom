@@ -70,7 +70,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 rel="noopener noreferrer"
                 className={styles.link}
               >
-                Live Demo &rarr;
+                {project.liveLabel ?? 'Live Demo'} &rarr;
               </a>
             )}
             {project.sourceUrl && (

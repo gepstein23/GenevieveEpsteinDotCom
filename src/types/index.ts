@@ -13,6 +13,8 @@ export interface Project {
   description: string
   techStack: string[]
   liveUrl?: string
+  /** Custom label for the live link (defaults to "Live Demo") */
+  liveLabel?: string
   sourceUrl?: string
   /** Used as alt text for the project thumbnail */
   imageAlt: string
@@ -27,10 +29,10 @@ export interface ExperienceItem {
   description: string[]
 }
 
-/** A skill with its category for the SkillOrbit display. */
+/** A skill with its category for the Tech Stack display. */
 export interface Skill {
   name: string
-  category: 'frontend' | 'backend' | 'tools' | 'languages'
+  category: 'languages' | 'frameworks' | 'cloud' | 'tools'
 }
 
 /** A social/external link (GitHub, LinkedIn, etc.). */

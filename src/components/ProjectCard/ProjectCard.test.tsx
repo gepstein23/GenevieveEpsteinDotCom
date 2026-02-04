@@ -46,4 +46,15 @@ describe('ProjectCard', () => {
     const links = screen.getAllByRole('link')
     expect(links).toHaveLength(1)
   })
+
+  it('uses custom liveLabel when provided', () => {
+    const projectCustomLabel = { ...mockProject, liveLabel: 'Try it out!' }
+    render(<ProjectCard project={projectCustomLabel} />)
+    expect(screen.getByText(/Try it out!/)).toBeInTheDocument()
+  })
+
+  it('falls back to Live Demo when liveLabel is not provided', () => {
+    render(<ProjectCard project={mockProject} />)
+    expect(screen.getByText(/Live Demo/)).toBeInTheDocument()
+  })
 })
