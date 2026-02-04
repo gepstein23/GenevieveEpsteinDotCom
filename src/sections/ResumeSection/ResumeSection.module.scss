@@ -165,15 +165,6 @@
   &:hover .company {
     color: var(--color-accent-cyan);
   }
-
-  &:hover .companyLogo {
-    filter: brightness(1.3);
-  }
-}
-
-.companyLogo {
-  flex-shrink: 0;
-  transition: filter var(--transition-fast);
 }
 
 .company {

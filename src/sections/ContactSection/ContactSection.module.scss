@@ -40,6 +40,7 @@
   text-align: left;
 
   @include md {
+    max-width: 60vw;
     padding: var(--space-xl) var(--space-3xl);
   }
 }

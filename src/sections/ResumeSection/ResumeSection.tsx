@@ -6,23 +6,6 @@ import { experience } from '@/data/experience'
 import { skills } from '@/data/skills'
 import styles from './ResumeSection.module.scss'
 
-/**
- * Tiny company logos as SVG paths (16x16 viewBox).
- * Keyed by company name for easy lookup.
- */
-const companyLogos: Record<string, { path: string; color: string }> = {
-  FanDuel: {
-    // Simplified crown/shield icon
-    path: 'M8 1L2 5v6l6 4 6-4V5L8 1zM8 3.2L12.2 6v4.4L8 13 3.8 10.4V6L8 3.2z',
-    color: '#1493ff',
-  },
-  'VMware by Broadcom': {
-    // Simplified V-check icon
-    path: 'M1 5l3-1 4 6 4-6 3 1-6.2 10h-1.6L1 5z',
-    color: '#cc092f',
-  },
-}
-
 const categories = [
   { key: 'languages', label: 'Languages', color: 'var(--color-text-secondary)' },
   { key: 'frameworks', label: 'Frameworks & Libraries', color: 'var(--color-accent-purple)' },
@@ -116,18 +99,6 @@ export default function ResumeSection() {
                       rel="noopener noreferrer"
                       className={styles.companyLink}
                     >
-                      {companyLogos[item.company] && (
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill={companyLogos[item.company].color}
-                          aria-hidden="true"
-                          className={styles.companyLogo}
-                        >
-                          <path d={companyLogos[item.company].path} />
-                        </svg>
-                      )}
                       <span className={styles.company}>{item.company}</span>
                     </a>
                     <ul className={styles.details}>
