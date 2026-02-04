@@ -26,7 +26,7 @@ export const particlesConfig: ISourceOptions = {
       value: { min: 0.2, max: 0.5 },
     },
     size: {
-      value: { min: 1, max: 3 },
+      value: { min: 3, max: 8 },
     },
     move: {
       enable: true,
@@ -40,8 +40,8 @@ export const particlesConfig: ISourceOptions = {
       enable: true,
       distance: 150,
       color: '#ffffff',
-      opacity: 0.08,
-      width: 1,
+      opacity: 0.12,
+      width: 2,
     },
   },
   interactivity: {
