@@ -1,0 +1,67 @@
+@use '../../styles/mixins' as *;
+
+.contact {
+  @include section;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-xl);
+
+  @include md {
+    font-size: var(--text-4xl);
+  }
+}
+
+.accent {
+  color: var(--color-accent-cyan);
+  font-family: var(--font-mono);
+  margin-right: var(--space-sm);
+}
+
+.subtext {
+  color: var(--color-text-secondary);
+  font-size: var(--text-lg);
+  max-width: 500px;
+  line-height: 1.7;
+  margin-bottom: var(--space-2xl);
+}
+
+.cta {
+  margin-bottom: var(--space-3xl);
+}
+
+.socials {
+  display: flex;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  cursor: none;
+  transition: color var(--transition-base), transform var(--transition-fast);
+
+  &:hover {
+    color: var(--color-accent-pink);
+    transform: translateY(-2px);
+  }
+
+  svg {
+    transition: filter var(--transition-base);
+  }
+
+  &:hover svg {
+    filter: drop-shadow(0 0 6px var(--color-accent-pink));
+  }
+}

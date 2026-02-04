@@ -1,0 +1,83 @@
+@use '../../styles/mixins' as *;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  padding: var(--space-md) var(--space-xl);
+  transition: background var(--transition-base), backdrop-filter var(--transition-base);
+}
+
+.scrolled {
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  border-bottom: 1px solid var(--color-glass-border);
+}
+
+.inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  border: none;
+  background-color: transparent;
+  cursor: none;
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.links {
+  display: none;
+  list-style: none;
+  gap: var(--space-xs);
+
+  @include md {
+    display: flex;
+  }
+}
+
+.link {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  cursor: none;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 8px;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+}
+
+.active {
+  color: var(--color-text-primary);
+}
+
+.indicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background: var(--color-accent-pink);
+  border-radius: 1px;
+  box-shadow: 0 0 8px var(--color-accent-pink);
+}

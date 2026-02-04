@@ -1,33 +1,24 @@
-/**
- * Root application component.
- *
- * This is the top-level layout that:
- * 1. Wraps everything in context providers (cursor state)
- * 2. Renders global visual layers (particles, gradient orbs, grain overlay, cursor)
- * 3. Renders the navigation and all page sections in order
- *
- * Sections are rendered in a single scrollable page (no routing needed
- * for a portfolio site — smooth scroll between sections via anchor links).
- *
- * Layer order (back to front):
- *   Particles → Gradient Orbs → Grain Overlay → Content → Navigation → Cursor
- */
-
 import { CursorProvider } from '@/context/CursorContext'
 import CustomCursor from '@/components/CustomCursor/CustomCursor'
 import ParticleBackground from '@/components/ParticleBackground/ParticleBackground'
 import AnimatedGradientOrb from '@/components/AnimatedGradientOrb/AnimatedGradientOrb'
 import GrainOverlay from '@/components/GrainOverlay/GrainOverlay'
+import Navigation from '@/components/Navigation/Navigation'
+import Footer from '@/components/Footer/Footer'
+import HeroSection from '@/sections/HeroSection/HeroSection'
+import AboutSection from '@/sections/AboutSection/AboutSection'
+import ProjectsSection from '@/sections/ProjectsSection/ProjectsSection'
+import ResumeSection from '@/sections/ResumeSection/ResumeSection'
+import ContactSection from '@/sections/ContactSection/ContactSection'
 import styles from '@/App.module.scss'
 
 export default function App() {
   return (
     <CursorProvider>
-      {/* Custom cursor follows mouse with spring physics */}
       <CustomCursor />
+      <Navigation />
 
       <div className={styles.app}>
-        {/* Background visual layers — behind all content */}
         <ParticleBackground />
         <AnimatedGradientOrb
           color="var(--color-accent-pink)"
@@ -53,20 +44,14 @@ export default function App() {
         <GrainOverlay />
 
         <main className={styles.main}>
-          {/* Sections will be added in Phases 5-9:
-              - HeroSection
-              - AboutSection
-              - ProjectsSection
-              - ResumeSection
-              - ContactSection
-          */}
-          <div className={styles.placeholder}>
-            <h1>Genevieve Epstein</h1>
-            <p>Site coming together...</p>
-          </div>
+          <HeroSection />
+          <AboutSection />
+          <ProjectsSection />
+          <ResumeSection />
+          <ContactSection />
         </main>
 
-        {/* Footer will be added in Phase 9 */}
+        <Footer />
       </div>
     </CursorProvider>
   )

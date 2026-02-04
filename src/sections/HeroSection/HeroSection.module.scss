@@ -1,0 +1,78 @@
+@use '../../styles/mixins' as *;
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  max-width: var(--max-width);
+}
+
+.greeting {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  color: var(--color-accent-cyan);
+  letter-spacing: 0.05em;
+
+  @include md {
+    font-size: var(--text-xl);
+  }
+}
+
+.content h1 {
+  font-size: var(--text-4xl);
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-pink),
+    var(--color-accent-purple),
+    var(--color-accent-cyan)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  @include md {
+    font-size: var(--text-5xl);
+  }
+
+  @include lg {
+    font-size: var(--text-6xl);
+  }
+}
+
+.tagline {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  color: var(--color-text-secondary);
+  min-height: 2em;
+
+  @include md {
+    font-size: var(--text-2xl);
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+
+.scrollHint {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}

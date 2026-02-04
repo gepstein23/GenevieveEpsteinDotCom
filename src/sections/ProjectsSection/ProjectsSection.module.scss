@@ -1,0 +1,33 @@
+@use '../../styles/mixins' as *;
+
+.projects {
+  @include section;
+}
+
+.heading {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-3xl);
+
+  @include md {
+    font-size: var(--text-4xl);
+  }
+}
+
+.accent {
+  color: var(--color-accent-pink);
+  font-family: var(--font-mono);
+  margin-right: var(--space-sm);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-xl);
+
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

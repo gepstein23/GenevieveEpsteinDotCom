@@ -1,0 +1,42 @@
+@use '../../styles/mixins' as *;
+
+.footer {
+  position: relative;
+  z-index: var(--z-content);
+  padding: var(--space-2xl) var(--space-xl);
+}
+
+.divider {
+  max-width: var(--max-width);
+  margin: 0 auto var(--space-2xl);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-glass-border),
+    transparent
+  );
+}
+
+.content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  text-align: center;
+}
+
+.copyright {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.tagline {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
