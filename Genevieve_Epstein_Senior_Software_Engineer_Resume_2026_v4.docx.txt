@@ -1,0 +1,38 @@
+﻿Genevieve Epstein 
+Atlanta, GA | 415.806.5125 | genevieve.epstein@gmail.com | genevieveepstein.com | linkedin.com/in/genevieveepstein
+Professional Summary
+Senior Software Engineer specializing in large-scale backend systems and cloud-native infrastructure, with a proven record of delivering high-impact features on AWS that reduce fraud, cost, and operational overhead. Ranked #1 Senior Software Engineer in vertical (2025); recognized for technical leadership, mentorship, and Java expertise.
+Technical Skills
+Languages: Java, Terraform (AWS), SQL, Python, C#, C++, HTML/CSS
+Systems: Mac OS, Windows, Linux
+Software/Frameworks: AWS (Lambda, API Gateway, IAM, SQS, SNS, Event Bridge, CloudWatch, EC2, ECR, ECS, S3, XRay & more), Confluent/Kafka, Flink, Docker, DataDog, IntelliJ IDEA, Eclipse, Maven, Spring, Hibernate, PagerDuty, Claude AI
+Certifications & Awards: FanDuel Rising Stars Program Award (July 2025)
+Professional Experience 
+FanDuel, Atlanta, GA        
+Senior Software Engineer - L4        Jul. 2024 – Present
+* Led design and delivery of fraud mitigation features on AWS and Confluent using event-driven architectures, resulting in 51,000+ fraudulent account suspensions, 3.45M+ hours of potential fraud prevented, and 1,500+ hours saved for analysts.
+* Drove process and operational improvements, including abstracting 3 algorithms into shared libraries, optimizing our build and deployment processes, implementing log management solutions, and redesigning a Flink feature to cut cost by 98%.
+* Emerged as de facto technical lead by aligning cross-team work, coordinating with external vendors, ensuring end-to-end observability, uncovering system gaps, and executing 9 emergency releases for time-sensitive requests.
+* Supported mission-critical, high-throughput services (such as withdrawals and login flows up to 3,000 reqs/sec) and delivered multiple external vendor integrations via webhooks and APIs with secure, observable data exchange.
+
+
+VMware by Broadcom, Boston, MA        
+Senior Software Engineer - ICB 3         Feb. 2023 – Jul. 2024
+* Developed 2 of 4 core VM cloning methods, improving performance by ~80%, reducing process time from days to hours.
+* Introduced 2 of 4 supported VM types, including one driving a cross-team rearchitecture of backup/failover management.
+* Designed and launched a log parsing/querying tool adopted across teams, significantly reducing debugging time.
+* Supported cross-functional teams by triaging 5,000+ test failures, guiding API development as a member of the API guild,  managing interns, and mentoring peers.
+Software Engineer 2         Dec. 2021 – Feb. 2023
+* Resolved 400+ product issues, found and filed 350+ bugs, implemented 10+ RESTful API endpoints.
+* Led integration of team workflows into new service environments, enabling a successful SaaS product launch.
+* Acted as subject matter expert for several key features, ensuring prioritization and delivery across environments.
+Student Cooperative Engineer (Full-time & Part-time Intern), Multiple Teams        Jul. 2019 – Dec. 2021
+Projects
+Poker High Hand Simulator        May 2023 – Present
+* Researching the optimization of High Hand promotions using MCTS by developing a memory-efficient Java app that performs adjustable simulations – with custom-built card-playing mechanics, React UI, animations, and ML capabilities all hosted on AWS EC2 and AWS Amplify.
+Education 
+Northeastern University, Khoury College of Computer Sciences, Boston, MA         Graduated December 2021
+B.Sc., Computer Science, Concentration in Systems, Minor in Music
+Other Interests
+Orchestra (Cello & Viola), Snowboarding, 3D printing, SoulCycle, Texas Hold ‘Em, PC Gaming, Trivia; Fluent in French 
+- page  of  -
