@@ -4,10 +4,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20vh var(--space-xl) var(--space-xl);
+  padding: var(--space-xl);
   text-align: center;
 }
 
@@ -19,15 +19,162 @@
   max-width: var(--max-width);
 }
 
+/* ═══════════════════════════════════════════
+   Entrance Animations (CSS — no JS dependency)
+   ═══════════════════════════════════════════ */
+
+/*
+ * The name uses a blur/scale/glow entrance but starts at full opacity.
+ * This guarantees it's visible on the browser's very first paint.
+ * Everything else uses fadeInUp with animation-fill-mode: both,
+ * which applies the from-state (opacity 0) before the delay elapses.
+ */
+
+@keyframes nameEntrance {
+  from {
+    filter: drop-shadow(0 0 40px var(--color-accent-pink))
+      drop-shadow(0 0 80px var(--color-accent-purple));
+    transform: scale(1.12);
+  }
+  to {
+    filter: drop-shadow(0 0 0 transparent);
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes photoEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Profile Photo with Animated Neon Frame
+   ═══════════════════════════════════════════ */
+
+.photoFrame {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: photoEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @include md {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Glow behind the frame */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      var(--color-accent-pink),
+      var(--color-accent-purple),
+      var(--color-accent-cyan),
+      var(--color-accent-purple),
+      var(--color-accent-pink)
+    );
+    opacity: 0.4;
+    filter: blur(16px);
+    animation: ringRotate 6s linear infinite;
+    transition: opacity var(--transition-base), filter var(--transition-base);
+  }
+
+  &:hover::before {
+    opacity: 0.7;
+    filter: blur(24px);
+  }
+}
+
+/* The spinning gradient ring border */
+.photoRing {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--color-accent-pink),
+    var(--color-accent-purple),
+    var(--color-accent-cyan),
+    var(--color-accent-purple),
+    var(--color-accent-pink)
+  );
+  animation: ringRotate 6s linear infinite;
+  transition: animation-duration var(--transition-base);
+
+  /* Inner mask to create the ring */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--color-bg-primary);
+  }
+
+  .photoFrame:hover & {
+    animation-duration: 3s;
+  }
+}
+
+.photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 1;
+  transition: transform var(--transition-base);
+
+  .photoFrame:hover & {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes ringRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Text Content
+   ═══════════════════════════════════════════ */
+
 .greeting {
   font-family: var(--font-mono);
   font-size: var(--text-lg);
   color: var(--color-accent-cyan);
   letter-spacing: 0.05em;
+  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0.5s both;
 
   @include md {
     font-size: var(--text-xl);
   }
+}
+
+.nameWrap {
+  animation: nameEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .content h1 {
@@ -56,6 +203,7 @@
   font-size: var(--text-xl);
   color: var(--color-text-secondary);
   min-height: 2em;
+  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0.7s both;
 
   @include md {
     font-size: var(--text-2xl);
@@ -68,6 +216,7 @@
   gap: var(--space-md);
   justify-content: center;
   margin-top: var(--space-md);
+  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0.95s both;
 }
 
 .scrollHint {
@@ -75,4 +224,20 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 1.4s both;
+}
+
+/* ═══════════════════════════════════════════
+   Reduced Motion
+   ═══════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .nameWrap,
+  .greeting,
+  .tagline,
+  .actions,
+  .scrollHint,
+  .photoFrame {
+    animation: none;
+  }
 }

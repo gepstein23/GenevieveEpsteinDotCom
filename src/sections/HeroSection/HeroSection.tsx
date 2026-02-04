@@ -1,53 +1,50 @@
-import { motion } from 'motion/react'
 import GlitchText from '@/components/GlitchText/GlitchText'
 import TypewriterText from '@/components/TypewriterText/TypewriterText'
 import MagneticButton from '@/components/MagneticButton/MagneticButton'
 import ScrollIndicator from '@/components/ScrollIndicator/ScrollIndicator'
 import { siteConfig } from '@/data/siteConfig'
+import headshotImg from '@/assets/genevieve-headshot_2025.jpg'
 import styles from './HeroSection.module.scss'
-
-const stagger = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
-  },
-}
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } },
-}
 
 export default function HeroSection() {
   return (
     <section id="hero" className={styles.hero}>
-      <motion.div
-        className={styles.content}
-        variants={stagger}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.p className={styles.greeting} variants={fadeUp}>
-          {siteConfig.greeting}
-        </motion.p>
+      <div className={styles.content}>
+        {/* Photo — fades in quickly */}
+        <div className={styles.photoFrame}>
+          <div className={styles.photoRing} />
+          <img
+            src={headshotImg}
+            alt="Genevieve Epstein"
+            className={styles.photo}
+            width={180}
+            height={180}
+          />
+        </div>
 
-        <motion.div variants={fadeUp}>
+        {/* Greeting — fades in after name lands */}
+        <p className={styles.greeting}>{siteConfig.greeting}</p>
+
+        {/* Name — visible from first paint, dramatic blur/scale entrance */}
+        <div className={styles.nameWrap}>
           <GlitchText text={siteConfig.name} as="h1" />
-        </motion.div>
+        </div>
 
-        <motion.div className={styles.tagline} variants={fadeUp}>
+        {/* Tagline — fades in after greeting */}
+        <div className={styles.tagline}>
           <TypewriterText phrases={[...siteConfig.taglines]} />
-        </motion.div>
+        </div>
 
-        <motion.div className={styles.actions} variants={fadeUp}>
+        {/* Buttons — appear last */}
+        <div className={styles.actions}>
           <MagneticButton href="#projects" variant="primary">
             View My Work
           </MagneticButton>
           <MagneticButton href="#contact" variant="secondary">
             Get In Touch
           </MagneticButton>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       <div className={styles.scrollHint}>
         <ScrollIndicator />

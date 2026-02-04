@@ -21,29 +21,32 @@ export default function App() {
       <Navigation />
 
       <div className={styles.app}>
-        <ParticleBackground />
-        <AnimatedGradientOrb
-          color="var(--color-accent-pink)"
-          size={500}
-          top="-10%"
-          left="-5%"
-          duration={25}
-        />
-        <AnimatedGradientOrb
-          color="var(--color-accent-purple)"
-          size={400}
-          top="30%"
-          right="-10%"
-          duration={20}
-        />
-        <AnimatedGradientOrb
-          color="var(--color-accent-cyan)"
-          size={350}
-          top="70%"
-          left="20%"
-          duration={30}
-        />
-        <GrainOverlay />
+        {/* Background layers — fixed wrapper ensures they never take flow space */}
+        <div className={styles.backgroundLayers}>
+          <ParticleBackground />
+          <AnimatedGradientOrb
+            color="var(--color-accent-pink)"
+            size={500}
+            top="-10%"
+            left="-5%"
+            duration={25}
+          />
+          <AnimatedGradientOrb
+            color="var(--color-accent-purple)"
+            size={400}
+            top="30%"
+            right="-10%"
+            duration={20}
+          />
+          <AnimatedGradientOrb
+            color="var(--color-accent-cyan)"
+            size={350}
+            top="70%"
+            left="20%"
+            duration={30}
+          />
+          <GrainOverlay />
+        </div>
 
         <main className={styles.main}>
           <HeroSection />

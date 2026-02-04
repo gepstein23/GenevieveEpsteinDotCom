@@ -37,12 +37,20 @@ Object.defineProperty(window, 'matchMedia', {
 /**
  * Mock IntersectionObserver — jsdom doesn't implement it,
  * but react-intersection-observer depends on it.
+ *
+ * Must be a real class so `new IntersectionObserver(...)` works.
  */
-const mockIntersectionObserver = vi.fn()
-mockIntersectionObserver.mockReturnValue({
-  observe: vi.fn(),
-  unobserve: vi.fn(),
-  disconnect: vi.fn(),
-})
-window.IntersectionObserver =
-  mockIntersectionObserver as unknown as typeof IntersectionObserver
+class MockIntersectionObserver implements IntersectionObserver {
+  readonly root: Element | Document | null = null
+  readonly rootMargin: string = ''
+  readonly thresholds: ReadonlyArray<number> = []
+  observe = vi.fn()
+  unobserve = vi.fn()
+  disconnect = vi.fn()
+  takeRecords = vi.fn().mockReturnValue([])
+  constructor(
+    _callback: IntersectionObserverCallback,
+    _options?: IntersectionObserverInit,
+  ) {}
+}
+window.IntersectionObserver = MockIntersectionObserver

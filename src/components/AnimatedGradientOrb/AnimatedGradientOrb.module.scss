@@ -7,11 +7,10 @@
  */
 
 .orb {
-  position: fixed;
+  position: absolute;
   border-radius: 50%;
   filter: blur(var(--blur-orb));
   opacity: 0.4;
-  z-index: var(--z-orbs);
   pointer-events: none;
 
   @media (prefers-reduced-motion: reduce) {
