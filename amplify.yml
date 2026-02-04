@@ -1,0 +1,19 @@
+# AWS Amplify build configuration.
+# Amplify detects this file automatically and uses it for CI/CD.
+# The 'dist' directory is Vite's default output folder.
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*

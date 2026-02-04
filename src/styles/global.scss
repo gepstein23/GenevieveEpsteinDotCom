@@ -1,0 +1,76 @@
+/**
+ * Global stylesheet — imported once in main.tsx.
+ *
+ * Import order matters:
+ * 1. Variables (design tokens available everywhere)
+ * 2. Reset (normalize browser defaults)
+ * 3. Typography (base text styles)
+ * 4. Animations (global keyframes)
+ *
+ * Mixins are NOT imported here because they're only used inside
+ * other SCSS files via @use, not globally.
+ */
+
+@use 'variables';
+@use 'reset';
+@use 'typography';
+@use 'animations';
+
+/* ── Global Styles ── */
+
+body {
+  background-color: var(--color-bg-primary);
+  overflow-x: hidden;
+  /* Hide default cursor globally — replaced by CustomCursor component */
+  cursor: none;
+}
+
+/* Restore default cursor on touch devices (detected in JS, but this is the fallback) */
+@media (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+}
+
+/* Smooth scrollbar styling for Webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* Selection highlight in accent color */
+::selection {
+  background: var(--color-accent-pink);
+  color: var(--color-bg-primary);
+}
+
+/* Focus visible outline for keyboard navigation (accessibility) */
+:focus-visible {
+  outline: 2px solid var(--color-accent-cyan);
+  outline-offset: 2px;
+}
+
+/* Utility: screen-reader only (visually hidden but accessible) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

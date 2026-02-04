@@ -1,0 +1,44 @@
+@use '../../styles/mixins' as *;
+
+/**
+ * GlowCard styles.
+ *
+ * Uses glassmorphism (semi-transparent bg + backdrop-filter blur) as the base.
+ * The ::after pseudo-element creates a radial gradient glow that follows
+ * the mouse position via CSS custom properties set in JavaScript.
+ */
+
+.glowCard {
+  @include glass;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-base);
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Mouse-following glow effect */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    /* Radial gradient centered on cursor position (set via JS) */
+    background: radial-gradient(
+      300px circle at var(--glow-x) var(--glow-y),
+      rgba(255, 0, 110, 0.12),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}

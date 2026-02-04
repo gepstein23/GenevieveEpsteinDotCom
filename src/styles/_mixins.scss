@@ -1,0 +1,74 @@
+/**
+ * Reusable SCSS mixins.
+ *
+ * These encapsulate common patterns so components don't repeat themselves.
+ * Each mixin has a single clear purpose.
+ */
+
+/* ── Responsive Breakpoints ── */
+/* Mobile-first: base styles are mobile, these add complexity for larger screens */
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+@mixin sm {
+  @media (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
+/* ── Glassmorphism ──
+ * The frosted-glass look used on cards and navigation.
+ * backdrop-filter creates the blur; the semi-transparent bg and border
+ * complete the glass illusion. */
+@mixin glass {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  border: 1px solid var(--color-glass-border);
+  border-radius: 16px;
+}
+
+/* ── Neon Glow ──
+ * Creates a colored glow around an element using box-shadow.
+ * Used on buttons, cards, and active nav items. */
+@mixin glow($color: var(--color-accent-pink), $spread: 20px) {
+  box-shadow: 0 0 $spread $color;
+}
+
+/* ── Section Layout ──
+ * Standard section wrapper: centered content with consistent padding. */
+@mixin section {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--section-padding);
+}
+
+/* ── Accessibility: Reduced Motion ──
+ * Disables animations/transitions when the user prefers reduced motion.
+ * Wrap animation declarations in this to respect the preference. */
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

@@ -1,0 +1,77 @@
+/**
+ * Design tokens for the portfolio site.
+ *
+ * All colors, spacing, typography, and breakpoints are defined here
+ * as CSS custom properties so they can be referenced everywhere.
+ * Using CSS custom properties (not SCSS variables) because they cascade
+ * and can be changed at runtime (useful for future theming).
+ */
+
+:root {
+  /* ── Color Palette ── */
+  /* Dark backgrounds with neon accents create the "creative/artistic" vibe */
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #12121a;
+  --color-bg-elevated: rgba(255, 255, 255, 0.03);
+
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: #a0a0b0;
+  --color-text-muted: #606070;
+
+  /* Neon accent colors — the signature look of the site */
+  --color-accent-pink: #ff006e;
+  --color-accent-cyan: #00f5d4;
+  --color-accent-purple: #7b2ff7;
+
+  /* Glassmorphism surface */
+  --color-glass-bg: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+
+  /* ── Typography ── */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3.5rem;
+  --text-6xl: 4.5rem;
+
+  /* ── Spacing ── */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+
+  /* ── Layout ── */
+  --max-width: 1200px;
+  --section-padding: var(--space-5xl) var(--space-xl);
+
+  /* ── Effects ── */
+  --blur-glass: 16px;
+  --blur-orb: 80px;
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  /* ── Z-Index Layers ──
+   * Organized so background effects stay behind content,
+   * and navigation/cursor float above everything. */
+  --z-particles: 0;
+  --z-orbs: 1;
+  --z-grain: 2;
+  --z-content: 10;
+  --z-nav: 100;
+  --z-cursor: 1000;
+}

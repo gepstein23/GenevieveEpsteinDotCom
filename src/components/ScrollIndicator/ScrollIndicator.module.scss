@@ -1,0 +1,17 @@
+/**
+ * ScrollIndicator styles.
+ *
+ * Positioned at the bottom-center of its parent (the Hero section).
+ * Uses the muted text color so it's visible but not distracting.
+ */
+
+.indicator {
+  display: flex;
+  justify-content: center;
+  padding-bottom: var(--space-xl);
+  color: var(--color-text-muted);
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}

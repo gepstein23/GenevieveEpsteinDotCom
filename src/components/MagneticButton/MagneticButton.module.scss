@@ -1,0 +1,56 @@
+@use '../../styles/mixins' as *;
+
+/**
+ * MagneticButton styles.
+ *
+ * Two variants: primary (filled gradient) and secondary (outline).
+ * Both have a neon glow that intensifies on hover.
+ */
+
+.magnetic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-xl);
+  border-radius: 50px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-base);
+  cursor: none;
+  text-decoration: none;
+  transition:
+    box-shadow var(--transition-base),
+    background var(--transition-base),
+    border-color var(--transition-base);
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent-cyan);
+    outline-offset: 4px;
+  }
+
+  @include reduced-motion {
+    transition: none;
+  }
+}
+
+.primary {
+  background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-purple));
+  color: white;
+  border: none;
+
+  &:hover {
+    @include glow(var(--color-accent-pink), 25px);
+  }
+}
+
+.secondary {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-glass-border);
+
+  &:hover {
+    border-color: var(--color-accent-cyan);
+    @include glow(var(--color-accent-cyan), 15px);
+  }
+}

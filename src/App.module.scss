@@ -1,0 +1,50 @@
+/**
+ * Root app layout styles.
+ *
+ * The app container is a flex column that fills the viewport.
+ * The main area grows to fill space between nav and footer.
+ */
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  position: relative;
+  z-index: var(--z-content);
+}
+
+/* Temporary placeholder — removed once real sections are added */
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: var(--space-md);
+  text-align: center;
+  font-family: var(--font-heading);
+
+  h1 {
+    font-size: var(--text-5xl);
+    background: linear-gradient(
+      135deg,
+      var(--color-accent-pink),
+      var(--color-accent-purple),
+      var(--color-accent-cyan)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  p {
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+}

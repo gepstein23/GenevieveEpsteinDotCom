@@ -1,0 +1,21 @@
+/**
+ * TypewriterText styles.
+ *
+ * The cursor bar blinks at 1-second intervals using the global
+ * 'blink' keyframe. The monospace font ensures consistent character
+ * width so text doesn't shift as characters are added/removed.
+ */
+
+.typewriter {
+  font-family: var(--font-mono);
+  display: inline-flex;
+  align-items: center;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  font-weight: 300;
+  color: var(--color-accent-cyan);
+  animation: blink 1s step-end infinite;
+}

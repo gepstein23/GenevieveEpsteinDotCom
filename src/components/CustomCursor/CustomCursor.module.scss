@@ -1,0 +1,22 @@
+/**
+ * CustomCursor styles.
+ *
+ * The cursor is fixed to the viewport and positioned via motion's
+ * x/y transforms. pointer-events: none ensures it doesn't interfere
+ * with clicking on actual elements underneath.
+ */
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+  /* Center the cursor shape on the actual pointer position */
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+
+  @media (prefers-reduced-motion: reduce) {
+    display: none;
+  }
+}
