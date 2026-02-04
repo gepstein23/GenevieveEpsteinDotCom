@@ -4,10 +4,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
-  padding: var(--space-xl);
+  padding: 20vh var(--space-xl) var(--space-xl);
   text-align: center;
 }
 

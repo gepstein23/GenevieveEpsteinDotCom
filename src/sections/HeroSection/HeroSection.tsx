@@ -9,7 +9,7 @@ import styles from './HeroSection.module.scss'
 const stagger = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
   },
 }
 

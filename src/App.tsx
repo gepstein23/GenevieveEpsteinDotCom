@@ -4,6 +4,7 @@ import ParticleBackground from '@/components/ParticleBackground/ParticleBackgrou
 import AnimatedGradientOrb from '@/components/AnimatedGradientOrb/AnimatedGradientOrb'
 import GrainOverlay from '@/components/GrainOverlay/GrainOverlay'
 import Navigation from '@/components/Navigation/Navigation'
+import ScrollProgress from '@/components/ScrollProgress/ScrollProgress'
 import Footer from '@/components/Footer/Footer'
 import HeroSection from '@/sections/HeroSection/HeroSection'
 import AboutSection from '@/sections/AboutSection/AboutSection'
@@ -16,6 +17,7 @@ export default function App() {
   return (
     <CursorProvider>
       <CustomCursor />
+      <ScrollProgress />
       <Navigation />
 
       <div className={styles.app}>

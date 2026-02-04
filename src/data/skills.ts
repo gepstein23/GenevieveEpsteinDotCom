@@ -8,23 +8,30 @@ import type { Skill } from '@/types'
  */
 
 export const skills: Skill[] = [
+  // Languages
+  { name: 'Java', category: 'languages' },
+  { name: 'Python', category: 'languages' },
+  { name: 'SQL', category: 'languages' },
+  { name: 'C#', category: 'languages' },
+  { name: 'C++', category: 'languages' },
+  { name: 'Terraform', category: 'languages' },
+
   // Frontend
   { name: 'React', category: 'frontend' },
   { name: 'TypeScript', category: 'frontend' },
   { name: 'HTML/CSS', category: 'frontend' },
-  { name: 'SCSS', category: 'frontend' },
 
   // Backend
-  { name: 'Python', category: 'backend' },
-  { name: 'Node.js', category: 'backend' },
-  { name: 'SQL', category: 'backend' },
+  { name: 'Spring', category: 'backend' },
+  { name: 'Hibernate', category: 'backend' },
+  { name: 'Maven', category: 'backend' },
+  { name: 'Kafka', category: 'backend' },
+  { name: 'Flink', category: 'backend' },
 
   // Tools & Platforms
   { name: 'AWS', category: 'tools' },
-  { name: 'Git', category: 'tools' },
   { name: 'Docker', category: 'tools' },
-
-  // Languages
-  { name: 'Java', category: 'languages' },
-  { name: 'C++', category: 'languages' },
+  { name: 'DataDog', category: 'tools' },
+  { name: 'IntelliJ', category: 'tools' },
+  { name: 'PagerDuty', category: 'tools' },
 ]

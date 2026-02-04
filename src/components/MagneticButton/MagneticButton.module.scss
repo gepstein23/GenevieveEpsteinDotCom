@@ -8,6 +8,8 @@
  */
 
 .magnetic {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -52,5 +54,28 @@
   &:hover {
     border-color: var(--color-accent-cyan);
     @include glow(var(--color-accent-cyan), 15px);
+  }
+}
+
+/* Sparkle particles on click */
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: white;
+  pointer-events: none;
+  animation: sparkle-burst 0.6s ease-out forwards;
+  box-shadow: 0 0 6px var(--color-accent-cyan);
+}
+
+@keyframes sparkle-burst {
+  0% {
+    transform: translate(-50%, -50%) translateX(0) translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translateX(calc(cos(var(--angle)) * 30px)) translateY(calc(sin(var(--angle)) * 30px)) scale(0);
+    opacity: 0;
   }
 }

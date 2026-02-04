@@ -1,28 +1,23 @@
-import { useRef, type ReactNode, type MouseEvent } from 'react'
+import { useRef, useState, type ReactNode, type MouseEvent } from 'react'
 import { motion, useMotionValue, useSpring } from 'motion/react'
 import { useCursor } from '@/context/CursorContext'
 import styles from './MagneticButton.module.scss'
 
 interface MagneticButtonProps {
   children: ReactNode
-  /** Click handler */
   onClick?: () => void
-  /** If set, renders as an anchor link instead of a button */
   href?: string
-  /** Visual variant changes the accent color */
   variant?: 'primary' | 'secondary'
 }
 
-/**
- * A button that subtly pulls toward the cursor when nearby.
- *
- * On hover, calculates the offset between cursor and button center,
- * then translates the button by a fraction of that offset (max ~10px).
- * This creates a "magnetic" pull effect that feels playful and responsive.
- *
- * Uses spring physics for smooth movement and snaps back when the
- * cursor leaves. Also triggers the custom cursor hover state.
- */
+interface Sparkle {
+  id: number
+  x: number
+  y: number
+}
+
+let sparkleId = 0
+
 export default function MagneticButton({
   children,
   onClick,
@@ -31,6 +26,7 @@ export default function MagneticButton({
 }: MagneticButtonProps) {
   const ref = useRef<HTMLElement>(null)
   const { setCursorVariant } = useCursor()
+  const [sparkles, setSparkles] = useState<Sparkle[]>([])
 
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -42,7 +38,6 @@ export default function MagneticButton({
     const rect = ref.current.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
     const centerY = rect.top + rect.height / 2
-    /* Move button by 30% of the offset — subtle but noticeable */
     x.set((e.clientX - centerX) * 0.3)
     y.set((e.clientY - centerY) * 0.3)
   }
@@ -57,6 +52,21 @@ export default function MagneticButton({
     setCursorVariant('hover')
   }
 
+  const handleClick = (e: MouseEvent) => {
+    if (!ref.current) return
+    const rect = ref.current.getBoundingClientRect()
+    const newSparkles: Sparkle[] = Array.from({ length: 6 }, () => ({
+      id: ++sparkleId,
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    }))
+    setSparkles((s) => [...s, ...newSparkles])
+    setTimeout(() => {
+      setSparkles((s) => s.filter((sp) => !newSparkles.includes(sp)))
+    }, 600)
+    onClick?.()
+  }
+
   const className = `${styles.magnetic} ${styles[variant]}`
 
   const sharedProps = {
@@ -66,8 +76,21 @@ export default function MagneticButton({
     onMouseMove: handleMouseMove,
     onMouseLeave: handleMouseLeave,
     onMouseEnter: handleMouseEnter,
+    onClick: handleClick,
     whileTap: { scale: 0.95 },
   }
+
+  const sparkleElements = sparkles.map((s, i) => (
+    <span
+      key={s.id}
+      className={styles.sparkle}
+      style={{
+        left: s.x,
+        top: s.y,
+        '--angle': `${(i % 6) * 60}deg`,
+      } as React.CSSProperties}
+    />
+  ))
 
   if (href) {
     return (
@@ -77,13 +100,15 @@ export default function MagneticButton({
         href={href}
       >
         {children}
+        {sparkleElements}
       </motion.a>
     )
   }
 
   return (
-    <motion.button {...sharedProps} onClick={onClick}>
+    <motion.button {...sharedProps}>
       {children}
+      {sparkleElements}
     </motion.button>
   )
 }

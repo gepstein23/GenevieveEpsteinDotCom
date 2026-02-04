@@ -19,13 +19,13 @@ export const socialLinks: SocialLink[] = [
   {
     id: 'linkedin',
     label: 'LinkedIn',
-    url: '#',
+    url: 'https://linkedin.com/in/genevieveepstein',
     icon: 'linkedin',
   },
   {
     id: 'email',
     label: 'Email',
-    url: 'mailto:your.email@example.com',
+    url: 'mailto:genevieve.epstein@gmail.com',
     icon: 'email',
   },
 ]
