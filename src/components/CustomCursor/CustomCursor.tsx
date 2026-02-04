@@ -5,33 +5,23 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 import styles from './CustomCursor.module.scss'
 
 /**
- * Custom animated cursor that replaces the default browser cursor.
+ * Custom cursor with two layers:
+ * 1. A small solid dot locked to exact mouse position (no lag)
+ * 2. A larger trailing ring with spring physics for personality
  *
- * The cursor is a circle that follows the mouse with spring physics,
- * creating a slight "lag" that feels organic. It changes shape and size
- * based on what the user is hovering over (controlled via CursorContext).
- *
- * Hidden on touch devices since they don't have a persistent pointer.
- *
- * Variants:
- * - default: small circle with neon border
- * - hover: larger circle with semi-transparent fill (for buttons, links)
- * - text: wider, shorter rectangle (for text areas)
- * - hidden: invisible (for when native cursor is needed)
+ * On hover, the dot scales up and the ring expands with a glow.
+ * Hidden on touch devices.
  */
 export default function CustomCursor() {
   const { variant } = useCursor()
   const isTouch = useMediaQuery('(pointer: coarse)')
 
-  /* Raw mouse position tracked as motion values (not React state)
-   * to avoid re-rendering on every pixel of mouse movement. */
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  /* Spring-smoothed position — creates the trailing effect.
-   * Lower damping = more bounce, higher stiffness = snappier follow. */
-  const springX = useSpring(mouseX, { stiffness: 500, damping: 28 })
-  const springY = useSpring(mouseY, { stiffness: 500, damping: 28 })
+  /* Ring trails behind with spring physics */
+  const ringX = useSpring(mouseX, { stiffness: 150, damping: 15, mass: 0.1 })
+  const ringY = useSpring(mouseY, { stiffness: 150, damping: 15, mass: 0.1 })
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -43,48 +33,37 @@ export default function CustomCursor() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [mouseX, mouseY])
 
-  /* Don't render on touch devices */
   if (isTouch) return null
 
   return (
-    <motion.div
-      className={styles.cursor}
-      style={{ x: springX, y: springY }}
-      animate={variant}
-      variants={{
-        default: {
-          width: 20,
-          height: 20,
-          borderRadius: '50%',
-          backgroundColor: 'transparent',
-          border: '2px solid var(--color-accent-pink)',
-          opacity: 1,
-        },
-        hover: {
-          width: 60,
-          height: 60,
-          borderRadius: '50%',
-          backgroundColor: 'rgba(255, 0, 110, 0.15)',
-          border: '2px solid var(--color-accent-pink)',
-          opacity: 1,
-        },
-        text: {
-          width: 4,
-          height: 32,
-          borderRadius: '2px',
-          backgroundColor: 'var(--color-accent-cyan)',
-          border: 'none',
-          opacity: 0.8,
-        },
-        hidden: {
-          opacity: 0,
-        },
-      }}
-      transition={{
-        type: 'spring',
-        stiffness: 300,
-        damping: 20,
-      }}
-    />
+    <>
+      {/* Dot: instant position, zero lag */}
+      <motion.div
+        className={styles.dot}
+        style={{ x: mouseX, y: mouseY }}
+        animate={variant}
+        variants={{
+          default: { scale: 1, opacity: 1 },
+          hover: { scale: 2.5, opacity: 1 },
+          text: { scaleX: 0.5, scaleY: 2, opacity: 0.9 },
+          hidden: { scale: 0, opacity: 0 },
+        }}
+        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+      />
+
+      {/* Ring: trails behind with spring physics */}
+      <motion.div
+        className={styles.ring}
+        style={{ x: ringX, y: ringY }}
+        animate={variant}
+        variants={{
+          default: { width: 36, height: 36, opacity: 0.5 },
+          hover: { width: 56, height: 56, opacity: 0.8 },
+          text: { width: 24, height: 24, opacity: 0.3 },
+          hidden: { width: 0, height: 0, opacity: 0 },
+        }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      />
+    </>
   )
 }
