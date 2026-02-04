@@ -18,7 +18,7 @@ const iconPaths: Record<string, string> = {
 const RATE_LIMIT_MS = 60_000
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+  const [formData, setFormData] = useState({ name: '', message: '' })
   const [status, setStatus] = useState<'idle' | 'sent' | 'rate-limited'>('idle')
   const lastSubmitRef = useRef(0)
   const mountTimeRef = useRef(Date.now())
@@ -50,15 +50,15 @@ export default function ContactSection() {
       }
       lastSubmitRef.current = now
 
-      // Construct mailto URL
-      const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`)
+      // Open mailto with form data pre-populated
+      const subject = encodeURIComponent('Hello from your portfolio!')
       const body = encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
+        `Hi Genevieve,\n\nMy name is ${formData.name}.\n\n${formData.message}`,
       )
       window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`
 
       setStatus('sent')
-      setFormData({ name: '', email: '', message: '' })
+      setFormData({ name: '', message: '' })
     },
     [formData],
   )
@@ -91,38 +91,20 @@ export default function ContactSection() {
               aria-hidden="true"
             />
 
-            <div className={styles.fieldRow}>
-              <div className={styles.field}>
-                <label htmlFor="contact-name" className={styles.label}>
-                  Name
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className={styles.input}
-                  placeholder="Your name"
-                />
-              </div>
-
-              <div className={styles.field}>
-                <label htmlFor="contact-email" className={styles.label}>
-                  Email
-                </label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className={styles.input}
-                  placeholder="your@email.com"
-                />
-              </div>
+            <div className={styles.field}>
+              <label htmlFor="contact-name" className={styles.label}>
+                Name
+              </label>
+              <input
+                id="contact-name"
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className={styles.input}
+                placeholder="Your name"
+              />
             </div>
 
             <div className={styles.field}>

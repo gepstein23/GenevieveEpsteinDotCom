@@ -8,11 +8,11 @@ describe('ContactSection', () => {
     expect(screen.getByText('Get In Touch')).toBeInTheDocument()
   })
 
-  it('renders the contact form with name, email, and message fields', () => {
+  it('renders the contact form with name and message fields (no email)', () => {
     const { container } = render(<ContactSection />)
     expect(container.querySelector('#contact-name')).toBeInTheDocument()
-    expect(container.querySelector('#contact-email')).toBeInTheDocument()
     expect(container.querySelector('#contact-message')).toBeInTheDocument()
+    expect(container.querySelector('#contact-email')).not.toBeInTheDocument()
   })
 
   it('renders the submit button', () => {

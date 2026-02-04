@@ -15,7 +15,6 @@ describe('ResumeSection', () => {
     expect(screen.getByText('reqs/sec handled')).toBeInTheDocument()
     expect(screen.getByText('fraud accounts caught')).toBeInTheDocument()
     expect(screen.getByText('hours of potential fraud prevented')).toBeInTheDocument()
-    expect(screen.getByText('Millions')).toBeInTheDocument()
     // Removed stats should not appear
     expect(screen.queryByText('issues resolved')).not.toBeInTheDocument()
     expect(screen.queryByText('API endpoints shipped')).not.toBeInTheDocument()

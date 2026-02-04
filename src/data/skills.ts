@@ -10,13 +10,13 @@ import type { Skill } from '@/types'
 export const skills: Skill[] = [
   // Languages
   { name: 'Java', category: 'languages', highlighted: true },
+  { name: 'Terraform', category: 'languages', highlighted: true },
   { name: 'Python', category: 'languages' },
   { name: 'TypeScript', category: 'languages' },
   { name: 'SQL', category: 'languages' },
   { name: 'C#', category: 'languages' },
   { name: 'C++', category: 'languages' },
   { name: 'Bash', category: 'languages' },
-  { name: 'Terraform', category: 'languages', highlighted: true },
 
   // Frameworks & Libraries
   { name: 'Spring', category: 'frameworks' },

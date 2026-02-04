@@ -12,9 +12,15 @@ export default function AboutSection() {
       </SectionReveal>
 
       <SectionReveal delay={0.1}>
-        <div className={styles.locationBadge}>
-          <span className={styles.locationPin}>&#x1F4CD;</span>
-          {siteConfig.location}
+        <div className={styles.badges}>
+          <div className={styles.locationBadge}>
+            <span className={styles.locationPin}>&#x1F4CD;</span>
+            {siteConfig.location}
+          </div>
+          <div className={styles.locationBadge}>
+            <span className={styles.locationPin}>&#x1F3E0;</span>
+            {siteConfig.hometown}
+          </div>
         </div>
       </SectionReveal>
 

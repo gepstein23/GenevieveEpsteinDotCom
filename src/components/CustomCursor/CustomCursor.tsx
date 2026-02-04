@@ -19,9 +19,9 @@ export default function CustomCursor() {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  /* Ring trails behind with spring physics */
-  const ringX = useSpring(mouseX, { stiffness: 150, damping: 15, mass: 0.1 })
-  const ringY = useSpring(mouseY, { stiffness: 150, damping: 15, mass: 0.1 })
+  /* Ring follows with a tight spring — subtle lag, not distracting */
+  const ringX = useSpring(mouseX, { stiffness: 300, damping: 28, mass: 0.1 })
+  const ringY = useSpring(mouseY, { stiffness: 300, damping: 28, mass: 0.1 })
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -57,9 +57,9 @@ export default function CustomCursor() {
         style={{ x: ringX, y: ringY }}
         animate={variant}
         variants={{
-          default: { width: 36, height: 36, opacity: 0.5 },
-          hover: { width: 56, height: 56, opacity: 0.8 },
-          text: { width: 24, height: 24, opacity: 0.3 },
+          default: { width: 28, height: 28, opacity: 0.4 },
+          hover: { width: 44, height: 44, opacity: 0.6 },
+          text: { width: 20, height: 20, opacity: 0.25 },
           hidden: { width: 0, height: 0, opacity: 0 },
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}

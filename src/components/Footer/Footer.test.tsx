@@ -16,17 +16,24 @@ describe('Footer', () => {
 
   it('renders both gallery photos', () => {
     render(<Footer />)
-    const photos = screen.getAllByRole('img')
-    expect(photos).toHaveLength(2)
-    expect(photos[0]).toHaveAttribute('alt', 'Genevieve Epstein — professional photo 1')
-    expect(photos[1]).toHaveAttribute('alt', 'Genevieve Epstein — professional photo 2')
+    expect(
+      screen.getByAltText('Genevieve Epstein — professional photo 1'),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByAltText('Genevieve Epstein — professional photo 2'),
+    ).toBeInTheDocument()
   })
 
   it('gallery photos have lazy loading', () => {
     render(<Footer />)
-    const photos = screen.getAllByRole('img')
-    for (const photo of photos) {
-      expect(photo).toHaveAttribute('loading', 'lazy')
-    }
+    const photo1 = screen.getByAltText('Genevieve Epstein — professional photo 1')
+    const photo2 = screen.getByAltText('Genevieve Epstein — professional photo 2')
+    expect(photo1).toHaveAttribute('loading', 'lazy')
+    expect(photo2).toHaveAttribute('loading', 'lazy')
+  })
+
+  it('renders the logo', () => {
+    render(<Footer />)
+    expect(screen.getByLabelText('GE logo')).toBeInTheDocument()
   })
 })

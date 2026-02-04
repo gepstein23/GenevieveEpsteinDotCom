@@ -1,0 +1,10 @@
+.logo {
+  display: block;
+  transition: filter var(--transition-base), transform var(--transition-fast);
+
+  &:hover {
+    filter: drop-shadow(0 0 8px rgba(255, 0, 110, 0.4))
+      drop-shadow(0 0 16px rgba(0, 245, 212, 0.2));
+    transform: scale(1.05);
+  }
+}

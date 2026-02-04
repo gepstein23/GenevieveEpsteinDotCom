@@ -26,15 +26,10 @@
 }
 
 .logo {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: var(--text-xl);
-  background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  display: flex;
+  align-items: center;
   border: none;
-  background-color: transparent;
+  background: none;
   cursor: none;
   padding: var(--space-xs) var(--space-sm);
 }

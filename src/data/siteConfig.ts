@@ -19,6 +19,7 @@ export const siteConfig = {
     "When I'm not building event-driven architectures or optimizing systems, you can find me playing cello, snowboarding, or deep in a game of Texas Hold 'Em.",
   ],
   location: 'Atlanta, GA',
+  hometown: 'San Francisco, CA',
   email: 'genevieve.epstein@gmail.com',
   resumeUrl: '#',
   interests: [

@@ -14,6 +14,7 @@ export const experience: ExperienceItem[] = [
     id: 'exp-1',
     role: 'Senior Software Engineer (L4)',
     company: 'FanDuel',
+    companyUrl: 'https://www.fanduel.com',
     period: 'Jul 2024 — Present',
     description: [
       'Led design and delivery of fraud mitigation features on AWS and Confluent using event-driven architectures, resulting in 51,000+ fraudulent account suspensions and 3.45M+ hours of potential fraud prevented.',
@@ -26,6 +27,7 @@ export const experience: ExperienceItem[] = [
     id: 'exp-2',
     role: 'Senior Software Engineer (ICB 3)',
     company: 'VMware by Broadcom',
+    companyUrl: 'https://www.broadcom.com/vmware',
     period: 'Feb 2023 — Jul 2024',
     description: [
       'Developed 2 of 4 core VM cloning methods, improving performance by ~80%, reducing process time from days to hours.',
@@ -37,7 +39,8 @@ export const experience: ExperienceItem[] = [
   {
     id: 'exp-3',
     role: 'Software Engineer 2',
-    company: 'VMware',
+    company: 'VMware by Broadcom',
+    companyUrl: 'https://www.broadcom.com/vmware',
     period: 'Dec 2021 — Feb 2023',
     description: [
       'Resolved 400+ product issues, found and filed 350+ bugs, implemented 10+ RESTful API endpoints.',
@@ -48,7 +51,8 @@ export const experience: ExperienceItem[] = [
   {
     id: 'exp-4',
     role: 'Student Cooperative Engineer',
-    company: 'VMware',
+    company: 'VMware by Broadcom',
+    companyUrl: 'https://www.broadcom.com/vmware',
     period: 'Jul 2019 — Dec 2021',
     description: [
       'Full-time and part-time intern across multiple teams, contributing to core product development.',

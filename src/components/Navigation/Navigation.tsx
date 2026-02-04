@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { useCursor } from '@/context/CursorContext'
+import Logo from '@/components/Logo/Logo'
 import type { SectionId } from '@/types'
 import styles from './Navigation.module.scss'
 
@@ -54,7 +55,7 @@ export default function Navigation() {
             onMouseEnter={() => setCursorVariant('hover')}
             onMouseLeave={() => setCursorVariant('default')}
           >
-            GE
+            <Logo size={28} />
           </button>
 
           {/* Desktop links */}

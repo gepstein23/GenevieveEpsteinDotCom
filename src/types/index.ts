@@ -25,6 +25,8 @@ export interface ExperienceItem {
   id: string
   role: string
   company: string
+  /** URL to the company's homepage */
+  companyUrl?: string
   period: string
   description: string[]
 }

@@ -19,6 +19,13 @@
   margin-right: var(--space-sm);
 }
 
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-2xl);
+}
+
 .locationBadge {
   display: inline-flex;
   align-items: center;
@@ -30,7 +37,6 @@
   border: 1px solid var(--color-glass-border);
   border-radius: 20px;
   padding: var(--space-xs) var(--space-md);
-  margin-bottom: var(--space-2xl);
 }
 
 .locationPin {
