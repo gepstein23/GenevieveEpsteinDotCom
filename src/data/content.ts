@@ -80,7 +80,7 @@ export const content = {
     heading: 'Experience',
     stats: [
       { end: 3000, suffix: '+', label: 'reqs/sec handled' },
-      { end: 51000, suffix: '+', label: 'fraud accounts caught' },
+      { end: 51000, suffix: '+', label: 'fraudsters suspended' },
       { end: 3450000, suffix: '+', label: 'hours of potential fraud prevented' },
     ],
     categories: [
