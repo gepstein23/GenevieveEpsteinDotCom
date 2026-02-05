@@ -60,7 +60,7 @@ export const content = {
           'Researching the optimization of High Hand promotions using Monte Carlo Tree Search. A memory-efficient Java app performing adjustable simulations with custom card-playing mechanics, React UI, animations, and ML capabilities — hosted on AWS EC2 and AWS Amplify.',
         techStack: ['Java', 'React', 'AWS EC2', 'AWS Amplify', 'MCTS'],
         sourceUrl: 'https://github.com/gepstein23/PokerHighHandSimulator',
-        liveUrl: '/wip.html',
+        liveUrl: 'https://pokersim.genevieveepstein.com',
         liveLabel: 'Try it out!',
         imageAlt: 'Poker High Hand Simulator screenshot',
       },

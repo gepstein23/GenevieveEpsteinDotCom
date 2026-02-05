@@ -51,3 +51,4 @@ terraform destroy   # type "yes" to confirm
 - CORS restricts browser-based requests to the allowed origin only. Direct curl/API calls bypass CORS (this is normal — the Lambda also checks the `Origin` header as a second layer).
 - To allow `www.genevieveepstein.com` as well, change `allowed_origin` or pass both via the variable.
 - DynamoDB PAY_PER_REQUEST has no minimum cost — you only pay for actual reads/writes.
+- API Gateway throttling is set to 5 req/s sustained, burst to 10. Adjust in `main.tf` under `default_route_settings` if needed.
