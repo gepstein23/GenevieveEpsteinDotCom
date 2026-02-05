@@ -37,13 +37,11 @@ export default function CookieClicker() {
       .catch(() => {})
   }, [])
 
-  const handleUsernameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    // Only allow alphanumeric, max 20 chars
-    if (/^[a-zA-Z0-9]{0,20}$/.test(value)) {
-      setUsername(value)
-      if (value) {
-        localStorage.setItem(USERNAME_KEY, value)
+  const handleUsernameChange = useCallback((newValue: string) => {
+    if (/^[a-zA-Z0-9]{0,20}$/.test(newValue)) {
+      setUsername(newValue)
+      if (newValue) {
+        localStorage.setItem(USERNAME_KEY, newValue)
       } else {
         localStorage.removeItem(USERNAME_KEY)
       }
@@ -74,7 +72,6 @@ export default function CookieClicker() {
         const res = await fetch(COOKIE_POST_URL, options)
         if (res.ok) {
           const data = await res.json()
-          // Use globalCount if available, fall back to count for backwards compat
           setCount(data.globalCount ?? data.count)
         }
       } catch {
@@ -107,15 +104,16 @@ export default function CookieClicker() {
           ))}
         </AnimatePresence>
 
-        <div className={styles.controls}>
-          <input
-            type="text"
-            className={styles.nameInput}
-            placeholder="your name (optional)"
-            value={username}
-            onChange={handleUsernameChange}
-            aria-label="Your name for the leaderboard"
-          />
+        <div className={styles.buttonRow}>
+          <button
+            className={styles.cookieButton}
+            onClick={sendCookie}
+            disabled={sending}
+          >
+            <span className={styles.emoji}>🍪</span>
+            <span className={styles.label}>send me a cookie</span>
+          </button>
+
           <button
             className={styles.leaderboardButton}
             onClick={openLeaderboard}
@@ -124,15 +122,6 @@ export default function CookieClicker() {
             🏆
           </button>
         </div>
-
-        <button
-          className={styles.cookieButton}
-          onClick={sendCookie}
-          disabled={sending}
-        >
-          <span className={styles.emoji}>🍪</span>
-          <span className={styles.label}>send me a cookie</span>
-        </button>
 
         <span className={styles.count}>
           {count.toLocaleString()} cookie{count !== 1 ? 's' : ''} received
@@ -143,6 +132,7 @@ export default function CookieClicker() {
         isOpen={leaderboardOpen}
         onClose={closeLeaderboard}
         currentUsername={username || null}
+        onUsernameChange={handleUsernameChange}
       />
     </>
   )

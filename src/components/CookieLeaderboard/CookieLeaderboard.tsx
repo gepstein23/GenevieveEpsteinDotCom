@@ -15,9 +15,10 @@ interface CookieLeaderboardProps {
   isOpen: boolean
   onClose: () => void
   currentUsername: string | null
+  onUsernameChange: (value: string) => void
 }
 
-export default function CookieLeaderboard({ isOpen, onClose, currentUsername }: CookieLeaderboardProps) {
+export default function CookieLeaderboard({ isOpen, onClose, currentUsername, onUsernameChange }: CookieLeaderboardProps) {
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([])
   const [globalCount, setGlobalCount] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -57,6 +58,10 @@ export default function CookieLeaderboard({ isOpen, onClose, currentUsername }: 
     }
   }, [onClose])
 
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    onUsernameChange(e.target.value)
+  }, [onUsernameChange])
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -90,6 +95,20 @@ export default function CookieLeaderboard({ isOpen, onClose, currentUsername }: 
                 &times;
               </button>
             </header>
+
+            <div className={styles.nameSection}>
+              <label htmlFor="cookie-username" className={styles.nameLabel}>
+                Your name (tracks your cookies on the board)
+              </label>
+              <input
+                id="cookie-username"
+                type="text"
+                className={styles.nameInput}
+                placeholder="enter a name..."
+                value={currentUsername ?? ''}
+                onChange={handleInputChange}
+              />
+            </div>
 
             <div className={styles.globalCount}>
               <span className={styles.globalLabel}>Total cookies sent</span>

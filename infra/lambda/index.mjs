@@ -6,40 +6,6 @@ const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN;
 
 const MAX_BODY_BYTES = 512;
 
-// ── Profanity filter ──
-// Censors bad words with asterisks in the stored displayName. The entry is kept.
-// Also catches common leet-speak substitutions (@ for a, 0 for o, 1 for i, etc.)
-
-const LEET_MAP = {
-  '0': 'o', '1': 'i', '3': 'e', '4': 'a', '5': 's',
-  '7': 't', '8': 'b', '9': 'g', '@': 'a', '$': 's',
-  '!': 'i', '+': 't', '(': 'c', '|': 'l',
-};
-
-// Normalize leet-speak to plain letters for matching purposes
-const normalizeLeet = (text) =>
-  text.split('').map(ch => LEET_MAP[ch] || ch).join('').toLowerCase();
-
-const BAD_WORDS = [
-  'ass','asshole','bastard','bitch','bollocks','cock','crap','cunt','damn',
-  'dick','douche','fag','faggot','fuck','goddamn','hell','jerk','kike',
-  'motherfucker','nigga','nigger','piss','prick','pussy','retard','shit',
-  'slut','spic','tit','tits','twat','wanker','whore',
-];
-
-const containsProfanity = (text) => {
-  const normalized = normalizeLeet(text);
-  return BAD_WORDS.some(word => normalized.includes(word));
-};
-
-const censorText = (text) => {
-  if (containsProfanity(text)) {
-    return '*'.repeat(text.length);
-  }
-  return text;
-};
-
-// ── Validation ──
 // Alphanumeric only, 1-20 chars
 const isValidUsername = (name) => {
   if (typeof name !== 'string') return false;
@@ -129,7 +95,7 @@ export const handler = async (event) => {
           const body = JSON.parse(event.body);
           if (body.username && isValidUsername(body.username)) {
             username = body.username;
-            displayName = censorText(username);
+            displayName = username;
           }
         } catch {
           // Invalid JSON — proceed without username
