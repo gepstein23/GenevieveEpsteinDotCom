@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://genevieveepstein.com/sitemap.xml
