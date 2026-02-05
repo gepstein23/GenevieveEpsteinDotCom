@@ -1,4 +1,4 @@
 export const featureFlags = {
-  cookieClicker: false,
+  cookieClicker: true,
   pokerSimLink: false,
 }

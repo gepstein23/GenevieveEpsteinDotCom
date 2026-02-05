@@ -2,7 +2,7 @@ provider "aws" {
   region = var.aws_region
 }
 
-# ── DynamoDB: single-item atomic counter ──
+# ── DynamoDB: cookie counter with leaderboard ──
 
 resource "aws_dynamodb_table" "cookies" {
   name         = "cookie-counter"
@@ -12,6 +12,23 @@ resource "aws_dynamodb_table" "cookies" {
   attribute {
     name = "id"
     type = "S"
+  }
+
+  attribute {
+    name = "type"
+    type = "S"
+  }
+
+  attribute {
+    name = "count"
+    type = "N"
+  }
+
+  global_secondary_index {
+    name            = "LeaderboardIndex"
+    hash_key        = "type"
+    range_key       = "count"
+    projection_type = "ALL"
   }
 }
 
@@ -38,8 +55,11 @@ resource "aws_iam_role_policy" "lambda_dynamo" {
     Version = "2012-10-17"
     Statement = [{
       Effect   = "Allow"
-      Action   = ["dynamodb:GetItem", "dynamodb:UpdateItem"]
-      Resource = aws_dynamodb_table.cookies.arn
+      Action   = ["dynamodb:GetItem", "dynamodb:UpdateItem", "dynamodb:Query"]
+      Resource = [
+        aws_dynamodb_table.cookies.arn,
+        "${aws_dynamodb_table.cookies.arn}/index/LeaderboardIndex"
+      ]
     }]
   })
 }
@@ -114,6 +134,12 @@ resource "aws_apigatewayv2_route" "get_count" {
 resource "aws_apigatewayv2_route" "post_cookie" {
   api_id    = aws_apigatewayv2_api.cookie.id
   route_key = "POST /cookie"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+}
+
+resource "aws_apigatewayv2_route" "get_leaderboard" {
+  api_id    = aws_apigatewayv2_api.cookie.id
+  route_key = "GET /cookie/leaderboard"
   target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
 }
 
