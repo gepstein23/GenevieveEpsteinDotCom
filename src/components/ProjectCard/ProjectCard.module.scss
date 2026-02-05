@@ -74,7 +74,7 @@
   font-weight: 500;
   color: var(--color-accent-pink);
   position: relative;
-  cursor: none;
+  cursor: pointer;
 
   /* Underline draws from left on hover */
   &::after {

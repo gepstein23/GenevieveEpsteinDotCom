@@ -96,7 +96,7 @@
   font-family: var(--font-body);
   font-size: var(--text-lg);
   transition: border-color var(--transition-base), box-shadow var(--transition-base);
-  cursor: none;
+
 
   &::placeholder {
     color: var(--color-text-muted);
@@ -125,7 +125,7 @@
   background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-purple));
   border: none;
   border-radius: var(--radius-sm, 6px);
-  cursor: none;
+
   transition: transform var(--transition-fast), box-shadow var(--transition-base);
 
   &:hover {
@@ -164,7 +164,7 @@
   color: var(--color-text-muted);
   font-family: var(--font-mono);
   font-size: var(--text-sm);
-  cursor: none;
+
   transition: color var(--transition-base), transform var(--transition-fast);
 
   &:hover {

@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# 🌐 GenevieveEpstein.com
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site for **Genevieve Epstein**.
 
-Currently, two official plugins are available:
+🚀 **Live at** [genevieveepstein.com](https://genevieveepstein.com) — hosted on **AWS Amplify**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- ⚛️ React 19 + TypeScript
+- ⚡ Vite 7
+- 🎨 SCSS Modules
+- 🎬 Motion (Framer Motion)
+- ✨ tsParticles + vanilla-tilt
+- 🧪 Vitest + Testing Library
 
-## Expanding the ESLint configuration
+## 📝 Content
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+All site text lives in one file: `src/data/content.ts`. Edit that to update anything — bio, projects, experience, skills, contact info, etc.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+```bash
+# Install dependencies
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start dev server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The site will be available at `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📦 Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Command | What it does |
+|---------|-------------|
+| `npm run dev` | 🔥 Dev server with hot reload |
+| `npm run build` | 🏗️ Type-check + production build |
+| `npm run preview` | 👀 Preview production build locally |
+| `npm run test` | 🧪 Run tests in watch mode |
+| `npm run test:run` | ✅ Run all tests once |
+| `npm run test:coverage` | 📊 Tests with coverage report |
+| `npm run lint` | 🔍 ESLint |
+
+## 🏗️ Deployment
+
+The site is deployed to [AWS Amplify](https://aws.amazon.com/amplify/). Pushes to `main` trigger automatic builds and deployment.

@@ -1,5 +1,4 @@
 import { useRef, type ReactNode, type MouseEvent } from 'react'
-import { useCursor } from '@/context/CursorContext'
 import styles from './GlowCard.module.scss'
 
 interface GlowCardProps {
@@ -14,12 +13,9 @@ interface GlowCardProps {
  * follows it, creating a spotlight/glow effect under the pointer.
  * This is achieved by setting a CSS custom property (--glow-x, --glow-y)
  * on the element, which the SCSS uses in a radial-gradient background.
- *
- * Also triggers the custom cursor's "hover" variant.
  */
 export default function GlowCard({ children, className = '' }: GlowCardProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const { setCursorVariant } = useCursor()
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!ref.current) return
@@ -33,8 +29,6 @@ export default function GlowCard({ children, className = '' }: GlowCardProps) {
       ref={ref}
       className={`${styles.glowCard} ${className}`}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setCursorVariant('hover')}
-      onMouseLeave={() => setCursorVariant('default')}
     >
       {children}
     </div>

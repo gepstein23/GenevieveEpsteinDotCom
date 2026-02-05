@@ -20,9 +20,9 @@ export const content = {
     greeting: "Hello, I'm",
     taglines: [
       'Senior Software Engineer',
-      'Backend Systems Builder',
+      'Mentor and Leader',
       'Cloud-Native Engineer',
-      'Cellist & Coder',
+      'Backend Systems Builder',
     ],
     ctaPrimary: 'View My Work',
     ctaSecondary: 'Get In Touch',
@@ -33,7 +33,7 @@ export const content = {
     heading: 'About Me',
     bio: [
       'Senior Software Engineer specializing in large-scale backend systems and cloud-native infrastructure, with a proven record of delivering high-impact features on AWS that reduce fraud, cost, and operational overhead.',
-      "When I'm not building event-driven architectures or optimizing systems, you can find me playing cello, snowboarding, or deep in a game of Texas Hold 'Em.",
+      "When I'm not building or optimizing systems, nor busy on-call, you can find me playing cello, snowboarding, travelling, or deep in a tournament of Texas Hold 'Em.",
     ],
     interestsHeading: "When I'm not coding",
     interests: [

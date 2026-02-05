@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { useCursor } from '@/context/CursorContext'
 import Logo from '@/components/Logo/Logo'
 import { content } from '@/data/content'
 import type { SectionId } from '@/types'
@@ -12,7 +11,6 @@ export default function Navigation() {
   const [active, setActive] = useState<SectionId>('hero')
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const { setCursorVariant } = useCursor()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,8 +45,6 @@ export default function Navigation() {
           <button
             className={styles.logo}
             onClick={() => handleClick('hero')}
-            onMouseEnter={() => setCursorVariant('hover')}
-            onMouseLeave={() => setCursorVariant('default')}
           >
             <Logo size={28} />
           </button>
@@ -60,8 +56,6 @@ export default function Navigation() {
                 <button
                   className={`${styles.link} ${active === id ? styles.active : ''}`}
                   onClick={() => handleClick(id)}
-                  onMouseEnter={() => setCursorVariant('hover')}
-                  onMouseLeave={() => setCursorVariant('default')}
                 >
                   {label}
                   {active === id && (
@@ -80,8 +74,6 @@ export default function Navigation() {
           <button
             className={`${styles.hamburger} ${menuOpen ? styles.open : ''}`}
             onClick={() => setMenuOpen((o) => !o)}
-            onMouseEnter={() => setCursorVariant('hover')}
-            onMouseLeave={() => setCursorVariant('default')}
             aria-label={menuOpen ? content.navigation.hamburgerOpen : content.navigation.hamburgerClosed}
           >
             <span />

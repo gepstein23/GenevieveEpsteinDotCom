@@ -1,6 +1,5 @@
 import { useRef, useState, type ReactNode, type MouseEvent } from 'react'
 import { motion, useMotionValue, useSpring } from 'motion/react'
-import { useCursor } from '@/context/CursorContext'
 import styles from './MagneticButton.module.scss'
 
 interface MagneticButtonProps {
@@ -25,7 +24,6 @@ export default function MagneticButton({
   variant = 'primary',
 }: MagneticButtonProps) {
   const ref = useRef<HTMLElement>(null)
-  const { setCursorVariant } = useCursor()
   const [sparkles, setSparkles] = useState<Sparkle[]>([])
 
   const x = useMotionValue(0)
@@ -45,11 +43,6 @@ export default function MagneticButton({
   const handleMouseLeave = () => {
     x.set(0)
     y.set(0)
-    setCursorVariant('default')
-  }
-
-  const handleMouseEnter = () => {
-    setCursorVariant('hover')
   }
 
   const handleClick = (e: MouseEvent) => {
@@ -75,7 +68,6 @@ export default function MagneticButton({
     style: { x: springX, y: springY },
     onMouseMove: handleMouseMove,
     onMouseLeave: handleMouseLeave,
-    onMouseEnter: handleMouseEnter,
     onClick: handleClick,
     whileTap: { scale: 0.95 },
   }

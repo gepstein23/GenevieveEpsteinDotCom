@@ -25,15 +25,13 @@ html {
 body {
   background-color: var(--color-bg-primary);
   overflow-x: hidden;
-  /* Hide default cursor globally — replaced by CustomCursor component */
-  cursor: none;
+  /* Bubbly pointer — standard arrow shape inflated by a thick same-color rounded stroke */
+  cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="22" viewBox="-2 -2 16 20"><path d="M1 0 L1 13 L4.5 10 L6.5 15.5 L8 14 L5.5 8.5 L11 7Z" fill="%23ff006e" stroke="%23ff006e" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></svg>') 3 2, auto;
 }
 
-/* Restore default cursor on touch devices (detected in JS, but this is the fallback) */
-@media (pointer: coarse) {
-  body {
-    cursor: auto;
-  }
+/* Same bubbly pointer for interactive elements */
+a, button, [role="button"], input[type="submit"] {
+  cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="22" viewBox="-2 -2 16 20"><path d="M1 0 L1 13 L4.5 10 L6.5 15.5 L8 14 L5.5 8.5 L11 7Z" fill="%23ff006e" stroke="%23ff006e" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></svg>') 3 2, pointer;
 }
 
 /* Smooth scrollbar styling for Webkit browsers */
