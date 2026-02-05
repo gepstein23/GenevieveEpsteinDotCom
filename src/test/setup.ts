@@ -16,6 +16,23 @@ afterEach(() => {
 })
 
 /**
+ * Mock localStorage — some jsdom/vitest combos don't provide
+ * a fully functional localStorage. Provide a simple in-memory shim.
+ */
+const localStorageStore: Record<string, string> = {}
+Object.defineProperty(window, 'localStorage', {
+  value: {
+    getItem: vi.fn((key: string) => localStorageStore[key] ?? null),
+    setItem: vi.fn((key: string, value: string) => { localStorageStore[key] = value }),
+    removeItem: vi.fn((key: string) => { delete localStorageStore[key] }),
+    clear: vi.fn(() => { Object.keys(localStorageStore).forEach(k => delete localStorageStore[k]) }),
+    get length() { return Object.keys(localStorageStore).length },
+    key: vi.fn((i: number) => Object.keys(localStorageStore)[i] ?? null),
+  },
+  writable: true,
+})
+
+/**
  * Mock window.matchMedia — jsdom doesn't implement it,
  * but our components use it for responsive behavior and
  * prefers-reduced-motion detection.

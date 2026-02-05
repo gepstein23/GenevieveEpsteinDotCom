@@ -55,7 +55,7 @@ resource "aws_iam_role_policy" "lambda_dynamo" {
     Version = "2012-10-17"
     Statement = [{
       Effect   = "Allow"
-      Action   = ["dynamodb:GetItem", "dynamodb:UpdateItem", "dynamodb:Query"]
+      Action   = ["dynamodb:GetItem", "dynamodb:UpdateItem", "dynamodb:DeleteItem", "dynamodb:Query"]
       Resource = [
         aws_dynamodb_table.cookies.arn,
         "${aws_dynamodb_table.cookies.arn}/index/LeaderboardIndex"
