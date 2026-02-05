@@ -12,7 +12,7 @@ interface FloatingCookie {
 }
 
 export default function CookieClicker() {
-  const [count, setCount] = useState<number | null>(null)
+  const [count, setCount] = useState(0)
   const [floatingCookies, setFloatingCookies] = useState<FloatingCookie[]>([])
   const [sending, setSending] = useState(false)
 
@@ -21,32 +21,37 @@ export default function CookieClicker() {
     fetch(COOKIE_GET_URL)
       .then(res => res.json())
       .then(data => setCount(data.count ?? 0))
-      .catch(() => setCount(0))
+      .catch(() => {})
   }, [])
 
-  const sendCookie = useCallback(async () => {
-    if (sending || !COOKIE_POST_URL) return
-    setSending(true)
-
+  const spawnCookie = useCallback(() => {
     const id = Date.now() + Math.random()
     const x = Math.random() * 60 + 20
     setFloatingCookies(prev => [...prev, { id, x }])
     setTimeout(() => {
       setFloatingCookies(prev => prev.filter(c => c.id !== id))
     }, 1500)
+  }, [])
 
-    try {
-      const res = await fetch(COOKIE_POST_URL, { method: 'POST' })
-      if (res.ok) {
-        const data = await res.json()
-        setCount(data.count)
+  const sendCookie = useCallback(async () => {
+    if (sending) return
+    setSending(true)
+    spawnCookie()
+
+    if (COOKIE_POST_URL) {
+      try {
+        const res = await fetch(COOKIE_POST_URL, { method: 'POST' })
+        if (res.ok) {
+          const data = await res.json()
+          setCount(data.count)
+        }
+      } catch {
+        // request failed — don't update count
       }
-    } catch {
-      // request failed — don't update count
-    } finally {
-      setSending(false)
     }
-  }, [sending])
+
+    setSending(false)
+  }, [sending, spawnCookie])
 
   return (
     <div className={styles.container}>
@@ -75,11 +80,9 @@ export default function CookieClicker() {
         <span className={styles.label}>send me a cookie</span>
       </button>
 
-      {count !== null && (
-        <span className={styles.count}>
-          {count.toLocaleString()} cookie{count !== 1 ? 's' : ''} received
-        </span>
-      )}
+      <span className={styles.count}>
+        {count.toLocaleString()} cookie{count !== 1 ? 's' : ''} received
+      </span>
     </div>
   )
 }
