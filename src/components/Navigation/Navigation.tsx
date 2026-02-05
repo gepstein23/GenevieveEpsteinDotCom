@@ -2,16 +2,11 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { useCursor } from '@/context/CursorContext'
 import Logo from '@/components/Logo/Logo'
+import { content } from '@/data/content'
 import type { SectionId } from '@/types'
 import styles from './Navigation.module.scss'
 
-const navItems: { id: SectionId; label: string }[] = [
-  { id: 'hero', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'resume', label: 'Resume' },
-  { id: 'contact', label: 'Contact' },
-]
+const navItems = content.navigation.items
 
 export default function Navigation() {
   const [active, setActive] = useState<SectionId>('hero')
@@ -87,7 +82,7 @@ export default function Navigation() {
             onClick={() => setMenuOpen((o) => !o)}
             onMouseEnter={() => setCursorVariant('hover')}
             onMouseLeave={() => setCursorVariant('default')}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={menuOpen ? content.navigation.hamburgerOpen : content.navigation.hamburgerClosed}
           >
             <span />
             <span />

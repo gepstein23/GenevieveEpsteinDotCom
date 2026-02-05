@@ -2,16 +2,8 @@ import { useState, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import SectionReveal from '@/components/SectionReveal/SectionReveal'
 import GlowCard from '@/components/GlowCard/GlowCard'
-import { experience } from '@/data/experience'
-import { skills } from '@/data/skills'
+import { content } from '@/data/content'
 import styles from './ResumeSection.module.scss'
-
-const categories = [
-  { key: 'languages', label: 'Languages', color: 'var(--color-text-secondary)' },
-  { key: 'frameworks', label: 'Frameworks & Libraries', color: 'var(--color-accent-purple)' },
-  { key: 'cloud', label: 'Cloud & Infrastructure', color: 'var(--color-accent-pink)' },
-  { key: 'tools', label: 'Tools & Observability', color: 'var(--color-accent-cyan)' },
-] as const
 
 function AnimatedCounter({ end, suffix = '' }: { end: number; suffix?: string }) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.5 })
@@ -45,29 +37,26 @@ function AnimatedCounter({ end, suffix = '' }: { end: number; suffix?: string })
 export default function ResumeSection() {
   const [hoveredEntry, setHoveredEntry] = useState<string | null>(null)
 
+  const { experience, stats, categories, techStackHeading, education, awards } = content.resume
+  const { skills } = content
+
   return (
     <section id="resume" className={styles.resume}>
       <SectionReveal>
         <h2 className={styles.heading}>
-          <span className={styles.accent}>//</span> Experience
+          <span className={styles.accent}>//</span> {content.resume.heading}
         </h2>
       </SectionReveal>
 
       {/* Stats bar */}
       <SectionReveal delay={0.1}>
         <div className={styles.stats}>
-          <div className={styles.stat}>
-            <AnimatedCounter end={3000} suffix="+" />
-            <span className={styles.statLabel}>reqs/sec handled</span>
-          </div>
-          <div className={styles.stat}>
-            <AnimatedCounter end={51000} suffix="+" />
-            <span className={styles.statLabel}>fraud accounts caught</span>
-          </div>
-          <div className={styles.stat}>
-            <AnimatedCounter end={3450000} suffix="+" />
-            <span className={styles.statLabel}>hours of potential fraud prevented</span>
-          </div>
+          {stats.map((stat) => (
+            <div key={stat.label} className={styles.stat}>
+              <AnimatedCounter end={stat.end} suffix={stat.suffix} />
+              <span className={styles.statLabel}>{stat.label}</span>
+            </div>
+          ))}
         </div>
       </SectionReveal>
 
@@ -117,7 +106,7 @@ export default function ResumeSection() {
         <div className={styles.sidebar}>
           <SectionReveal direction="right" delay={0.2}>
             <GlowCard className={styles.sidebarCard}>
-              <h3 className={styles.sidebarHeading}>Tech Stack</h3>
+              <h3 className={styles.sidebarHeading}>{techStackHeading}</h3>
               <div className={styles.skillCategories}>
                 {categories.map((cat) => (
                   <div key={cat.key} className={styles.category}>
@@ -145,32 +134,27 @@ export default function ResumeSection() {
 
           <SectionReveal direction="right" delay={0.3}>
             <GlowCard className={styles.sidebarCard}>
-              <h3 className={styles.sidebarHeading}>Education</h3>
-              <p className={styles.eduDegree}>B.Sc. Computer Science</p>
-              <p className={styles.eduSchool}>Northeastern University</p>
-              <p className={styles.eduDetail}>Khoury College of Computer Sciences</p>
-              <p className={styles.eduDetail}>Concentration in Systems, Minor in Music</p>
-              <p className={styles.eduDate}>Graduated December 2021</p>
+              <h3 className={styles.sidebarHeading}>{education.heading}</h3>
+              <p className={styles.eduDegree}>{education.degree}</p>
+              <p className={styles.eduSchool}>{education.school}</p>
+              <p className={styles.eduDetail}>{education.college}</p>
+              <p className={styles.eduDetail}>{education.concentration}</p>
+              <p className={styles.eduDate}>{education.graduationDate}</p>
             </GlowCard>
           </SectionReveal>
 
           <SectionReveal direction="right" delay={0.4}>
             <GlowCard className={styles.sidebarCard}>
-              <h3 className={styles.sidebarHeading}>Awards</h3>
-              <div className={styles.award}>
-                <span className={styles.awardIcon}>&#9733;</span>
-                <div>
-                  <p className={styles.awardTitle}>Rising Stars Program Award</p>
-                  <p className={styles.awardOrg}>FanDuel &middot; July 2025</p>
+              <h3 className={styles.sidebarHeading}>{awards.heading}</h3>
+              {awards.items.map((award) => (
+                <div key={award.title} className={styles.award}>
+                  <span className={styles.awardIcon}>&#9733;</span>
+                  <div>
+                    <p className={styles.awardTitle}>{award.title}</p>
+                    <p className={styles.awardOrg}>{award.org}</p>
+                  </div>
                 </div>
-              </div>
-              <div className={styles.award}>
-                <span className={styles.awardIcon}>&#9733;</span>
-                <div>
-                  <p className={styles.awardTitle}>#1 Ranked Senior Software Engineer</p>
-                  <p className={styles.awardOrg}>FanDuel Trust &amp; Safety &middot; 2025</p>
-                </div>
-              </div>
+              ))}
             </GlowCard>
           </SectionReveal>
         </div>

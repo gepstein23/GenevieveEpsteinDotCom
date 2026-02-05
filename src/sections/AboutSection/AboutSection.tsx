@@ -1,5 +1,5 @@
 import SectionReveal from '@/components/SectionReveal/SectionReveal'
-import { siteConfig } from '@/data/siteConfig'
+import { content } from '@/data/content'
 import styles from './AboutSection.module.scss'
 
 export default function AboutSection() {
@@ -7,7 +7,7 @@ export default function AboutSection() {
     <section id="about" className={styles.about}>
       <SectionReveal>
         <h2 className={styles.heading}>
-          <span className={styles.accent}>//</span> About Me
+          <span className={styles.accent}>//</span> {content.about.heading}
         </h2>
       </SectionReveal>
 
@@ -15,27 +15,27 @@ export default function AboutSection() {
         <div className={styles.badges}>
           <div className={styles.locationBadge}>
             <span className={styles.locationPin}>&#x1F4CD;</span>
-            {siteConfig.location}
+            {content.meta.location}
           </div>
           <div className={styles.locationBadge}>
             <span className={styles.locationPin}>&#x1F3E0;</span>
-            {siteConfig.hometown}
+            {content.meta.hometown}
           </div>
         </div>
       </SectionReveal>
 
       <SectionReveal direction="up" delay={0.15}>
         <div className={styles.bio}>
-          {siteConfig.bio.map((paragraph, i) => (
+          {content.about.bio.map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
           ))}
         </div>
       </SectionReveal>
 
       <SectionReveal direction="up" delay={0.25}>
-        <h3 className={styles.interestsHeading}>When I'm not coding</h3>
+        <h3 className={styles.interestsHeading}>{content.about.interestsHeading}</h3>
         <div className={styles.interests}>
-          {[...siteConfig.interests].map((item, i) => (
+          {[...content.about.interests].map((item, i) => (
             <span key={i} className={styles.chip}>
               <span className={styles.chipEmoji}>{item.emoji}</span>
               {item.label}

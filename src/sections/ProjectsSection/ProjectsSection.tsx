@@ -1,7 +1,7 @@
 import SectionReveal from '@/components/SectionReveal/SectionReveal'
 import ProjectCard from '@/components/ProjectCard/ProjectCard'
 import GlowCard from '@/components/GlowCard/GlowCard'
-import { projects } from '@/data/projects'
+import { content } from '@/data/content'
 import styles from './ProjectsSection.module.scss'
 
 export default function ProjectsSection() {
@@ -9,12 +9,12 @@ export default function ProjectsSection() {
     <section id="projects" className={styles.projects}>
       <SectionReveal>
         <h2 className={styles.heading}>
-          <span className={styles.accent}>//</span> Projects
+          <span className={styles.accent}>//</span> {content.projects.heading}
         </h2>
       </SectionReveal>
 
       <div className={styles.grid}>
-        {projects.map((project, i) => (
+        {content.projects.items.map((project, i) => (
           <SectionReveal key={project.id} direction="up" delay={0.1 * (i + 1)}>
             <ProjectCard project={project} />
           </SectionReveal>
@@ -23,13 +23,13 @@ export default function ProjectsSection() {
 
       <SectionReveal delay={0.3}>
         <a
-          href="https://github.com/gepstein23?tab=repositories"
+          href={content.projects.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.seeMoreLink}
         >
           <GlowCard className={styles.seeMoreCard}>
-            <span className={styles.seeMoreText}>See more!</span>
+            <span className={styles.seeMoreText}>{content.projects.githubLinkText}</span>
             <svg
               width="20"
               height="20"

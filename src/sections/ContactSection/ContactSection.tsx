@@ -1,8 +1,7 @@
 import { useState, useRef, useCallback } from 'react'
 import SectionReveal from '@/components/SectionReveal/SectionReveal'
 import GlowCard from '@/components/GlowCard/GlowCard'
-import { socialLinks } from '@/data/socialLinks'
-import { siteConfig } from '@/data/siteConfig'
+import { content } from '@/data/content'
 import styles from './ContactSection.module.scss'
 
 const iconPaths: Record<string, string> = {
@@ -51,11 +50,11 @@ export default function ContactSection() {
       lastSubmitRef.current = now
 
       // Open mailto with form data pre-populated
-      const subject = encodeURIComponent('Hello from your portfolio!')
+      const subject = encodeURIComponent(content.contact.emailSubject)
       const body = encodeURIComponent(
-        `Hi Genevieve,\n\nMy name is ${formData.name}.\n\n${formData.message}`,
+        content.contact.emailBodyTemplate(formData.name, formData.message),
       )
-      window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`
+      window.location.href = `mailto:${content.meta.email}?subject=${subject}&body=${body}`
 
       setStatus('sent')
       setFormData({ name: '', message: '' })
@@ -67,15 +66,12 @@ export default function ContactSection() {
     <section id="contact" className={styles.contact}>
       <SectionReveal>
         <h2 className={styles.heading}>
-          <span className={styles.accent}>//</span> Get In Touch
+          <span className={styles.accent}>//</span> {content.contact.heading}
         </h2>
       </SectionReveal>
 
       <SectionReveal delay={0.15}>
-        <p className={styles.subtext}>
-          Have a project in mind, want to collaborate, or just want to say hi?
-          I'd love to hear from you.
-        </p>
+        <p className={styles.subtext}>{content.contact.subtext}</p>
       </SectionReveal>
 
       <SectionReveal delay={0.2}>
@@ -93,7 +89,7 @@ export default function ContactSection() {
 
             <div className={styles.field}>
               <label htmlFor="contact-name" className={styles.label}>
-                Name
+                {content.contact.form.nameLabel}
               </label>
               <input
                 id="contact-name"
@@ -103,13 +99,13 @@ export default function ContactSection() {
                 onChange={handleChange}
                 required
                 className={styles.input}
-                placeholder="Your name"
+                placeholder={content.contact.form.namePlaceholder}
               />
             </div>
 
             <div className={styles.field}>
               <label htmlFor="contact-message" className={styles.label}>
-                Message
+                {content.contact.form.messageLabel}
               </label>
               <textarea
                 id="contact-message"
@@ -118,24 +114,20 @@ export default function ContactSection() {
                 onChange={handleChange}
                 required
                 className={styles.textarea}
-                placeholder="What's on your mind?"
+                placeholder={content.contact.form.messagePlaceholder}
                 rows={5}
               />
             </div>
 
             <button type="submit" className={styles.submitBtn}>
-              Send Message &rarr;
+              {content.contact.form.submitText}
             </button>
 
             {status === 'sent' && (
-              <p className={styles.statusMsg}>
-                Opening your email client&hellip; Thanks for reaching out!
-              </p>
+              <p className={styles.statusMsg}>{content.contact.statusSent}</p>
             )}
             {status === 'rate-limited' && (
-              <p className={styles.statusMsgError}>
-                Please wait a moment before sending another message.
-              </p>
+              <p className={styles.statusMsgError}>{content.contact.statusRateLimited}</p>
             )}
           </form>
         </GlowCard>
@@ -143,7 +135,7 @@ export default function ContactSection() {
 
       <SectionReveal delay={0.35}>
         <div className={styles.socials}>
-          {socialLinks.map((link) => (
+          {content.socialLinks.map((link) => (
             <a
               key={link.id}
               href={link.url}

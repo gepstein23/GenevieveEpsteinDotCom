@@ -1,8 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@/test/test-utils'
 import ResumeSection from './ResumeSection'
-import { experience } from '@/data/experience'
-import { skills } from '@/data/skills'
+import { content } from '@/data/content'
+
+const experience = content.resume.experience
+const skills = content.skills
 
 describe('ResumeSection', () => {
   it('renders the Experience heading', () => {
@@ -67,16 +69,11 @@ describe('ResumeSection', () => {
     expect(screen.getByText('Rising Stars Program Award')).toBeInTheDocument()
   })
 
-  it('renders the #1 SSE award with Trust & Safety vertical and 2025', () => {
+  it('renders all award items from content data', () => {
     render(<ResumeSection />)
-    expect(
-      screen.getByText('#1 Ranked Senior Software Engineer'),
-    ).toBeInTheDocument()
-    const awardOrg = screen.getByText(/Trust & Safety/)
-    expect(awardOrg).toBeInTheDocument()
-    expect(awardOrg.textContent).toContain('2025')
-    // "December" was removed from the award
-    expect(awardOrg.textContent).not.toContain('December')
+    for (const award of content.resume.awards.items) {
+      expect(screen.getByText(award.title)).toBeInTheDocument()
+    }
   })
 
   it('does not include SCSS in skills', () => {

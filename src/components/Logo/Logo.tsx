@@ -1,3 +1,4 @@
+import { content } from '@/data/content'
 import styles from './Logo.module.scss'
 
 interface LogoProps {
@@ -19,7 +20,7 @@ export default function Logo({ size = 32, className = '' }: LogoProps) {
       width={width}
       height={height}
       className={`${styles.logo} ${className}`}
-      aria-label="GE logo"
+      aria-label={content.logo.ariaLabel}
       role="img"
     >
       <defs>

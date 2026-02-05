@@ -1,31 +1,7 @@
+import { content } from './content'
 import type { SocialLink } from '@/types'
 
 /**
- * Social and external links.
- *
- * The icon field matches the SVG icon rendered in the SocialLinks component.
- * Update URLs here — they propagate to both the Contact section and Footer.
- *
- * TODO: Replace placeholder URLs with real profiles.
+ * Re-exported from content.ts for backwards compatibility.
  */
-
-export const socialLinks: SocialLink[] = [
-  {
-    id: 'github',
-    label: 'GitHub',
-    url: 'https://github.com/gepstein23',
-    icon: 'github',
-  },
-  {
-    id: 'linkedin',
-    label: 'LinkedIn',
-    url: 'https://linkedin.com/in/genevieveepstein',
-    icon: 'linkedin',
-  },
-  {
-    id: 'email',
-    label: 'Email',
-    url: 'mailto:genevieve.epstein@gmail.com',
-    icon: 'email',
-  },
-]
+export const socialLinks: SocialLink[] = [...content.socialLinks]

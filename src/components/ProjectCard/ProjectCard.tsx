@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react'
 import VanillaTilt from 'vanilla-tilt'
 import GlowCard from '@/components/GlowCard/GlowCard'
+import { content } from '@/data/content'
 import type { Project } from '@/types'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import styles from './ProjectCard.module.scss'
@@ -70,7 +71,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 rel="noopener noreferrer"
                 className={styles.link}
               >
-                {project.liveLabel ?? 'Live Demo'} &rarr;
+                {project.liveLabel ?? content.projectCard.liveDemoLabel} &rarr;
               </a>
             )}
             {project.sourceUrl && (
@@ -80,7 +81,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 rel="noopener noreferrer"
                 className={styles.link}
               >
-                Source Code &rarr;
+                {content.projectCard.sourceCodeLabel} &rarr;
               </a>
             )}
           </div>

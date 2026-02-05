@@ -1,4 +1,4 @@
-import { siteConfig } from '@/data/siteConfig'
+import { content } from '@/data/content'
 import Logo from '@/components/Logo/Logo'
 import photo1 from '@/assets/linderpix-NU-KCCS-24916-web (1).jpg'
 import photo2 from '@/assets/linderpix-NU-KCCS-24962-web (1).jpg'
@@ -11,7 +11,7 @@ export default function Footer() {
         <div className={styles.galleryItem}>
           <img
             src={photo1}
-            alt="Genevieve Epstein — professional photo 1"
+            alt={content.footer.photoAlts[0]}
             className={styles.galleryImg}
             loading="lazy"
           />
@@ -19,7 +19,7 @@ export default function Footer() {
         <div className={styles.galleryItem}>
           <img
             src={photo2}
-            alt="Genevieve Epstein — professional photo 2"
+            alt={content.footer.photoAlts[1]}
             className={styles.galleryImg}
             loading="lazy"
           />
@@ -30,9 +30,9 @@ export default function Footer() {
       <div className={styles.content}>
         <Logo size={36} />
         <p className={styles.copyright}>
-          &copy; {new Date().getFullYear()} {siteConfig.name}
+          &copy; {new Date().getFullYear()} {content.meta.name}
         </p>
-        <p className={styles.tagline}>Built with curiosity & code</p>
+        <p className={styles.tagline}>{content.footer.tagline}</p>
       </div>
     </footer>
   )
