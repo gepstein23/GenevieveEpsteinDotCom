@@ -49,7 +49,19 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     <div ref={tiltRef}>
       <GlowCard className={styles.card}>
         {/* Gradient placeholder for project screenshot */}
-        <div className={styles.thumbnail} aria-hidden="true" />
+        <div className={styles.thumbnailWrap}>
+          <div className={styles.thumbnail} aria-hidden="true" />
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.badge}
+            >
+              {project.liveLabel ?? content.projectCard.liveDemoLabel} &rarr;
+            </a>
+          )}
+        </div>
 
         <div className={styles.content}>
           <h3 className={styles.title}>{project.title}</h3>
@@ -64,16 +76,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
 
           <div className={styles.links}>
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.link}
-              >
-                {project.liveLabel ?? content.projectCard.liveDemoLabel} &rarr;
-              </a>
-            )}
             {project.sourceUrl && (
               <a
                 href={project.sourceUrl}

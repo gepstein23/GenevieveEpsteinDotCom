@@ -15,7 +15,7 @@ describe('ResumeSection', () => {
   it('renders the reqs/sec, fraud, and fraud prevention stats', () => {
     render(<ResumeSection />)
     expect(screen.getByText('reqs/sec handled')).toBeInTheDocument()
-    expect(screen.getByText('fraud accounts caught')).toBeInTheDocument()
+    expect(screen.getByText('fraudsters suspended')).toBeInTheDocument()
     expect(screen.getByText('hours of potential fraud prevented')).toBeInTheDocument()
     // Removed stats should not appear
     expect(screen.queryByText('issues resolved')).not.toBeInTheDocument()
