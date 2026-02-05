@@ -6,6 +6,7 @@ import GrainOverlay from '@/components/GrainOverlay/GrainOverlay'
 import Navigation from '@/components/Navigation/Navigation'
 import ScrollProgress from '@/components/ScrollProgress/ScrollProgress'
 import Footer from '@/components/Footer/Footer'
+import CookieClicker from '@/components/CookieClicker/CookieClicker'
 import HeroSection from '@/sections/HeroSection/HeroSection'
 import AboutSection from '@/sections/AboutSection/AboutSection'
 import ProjectsSection from '@/sections/ProjectsSection/ProjectsSection'
@@ -19,6 +20,7 @@ export default function App() {
       <CustomCursor />
       <ScrollProgress />
       <Navigation />
+      <CookieClicker />
 
       <div className={styles.app}>
         {/* Background layers — fixed wrapper ensures they never take flow space */}
