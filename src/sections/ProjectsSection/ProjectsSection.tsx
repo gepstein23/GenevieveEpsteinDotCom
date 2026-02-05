@@ -2,7 +2,14 @@ import SectionReveal from '@/components/SectionReveal/SectionReveal'
 import ProjectCard from '@/components/ProjectCard/ProjectCard'
 import GlowCard from '@/components/GlowCard/GlowCard'
 import { content } from '@/data/content'
+import { featureFlags } from '@/config/featureFlags'
 import styles from './ProjectsSection.module.scss'
+
+const projects = content.projects.items.map(p =>
+  p.id === 'poker-high-hand' && !featureFlags.pokerSimLink
+    ? { ...p, liveUrl: undefined, liveLabel: undefined }
+    : p,
+)
 
 export default function ProjectsSection() {
   return (
@@ -14,7 +21,7 @@ export default function ProjectsSection() {
       </SectionReveal>
 
       <div className={styles.grid}>
-        {content.projects.items.map((project, i) => (
+        {projects.map((project, i) => (
           <SectionReveal key={project.id} direction="up" delay={0.1 * (i + 1)}>
             <ProjectCard project={project} />
           </SectionReveal>
