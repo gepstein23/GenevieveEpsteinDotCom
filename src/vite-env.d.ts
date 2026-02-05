@@ -7,6 +7,10 @@
  * mapping class names to unique scoped strings. Without this,
  * importing SCSS modules would cause TypeScript errors.
  */
+interface ImportMetaEnv {
+  readonly VITE_COOKIE_API_URL: string
+}
+
 declare module '*.module.scss' {
   const classes: { readonly [key: string]: string }
   export default classes

@@ -2,8 +2,9 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import styles from './CookieClicker.module.scss'
 
-const COOKIE_POST_URL = 'https://example.com/api/cookie'
-const COOKIE_GET_URL = 'https://example.com/api/cookie/count'
+const API_URL = import.meta.env.VITE_COOKIE_API_URL as string | undefined
+const COOKIE_POST_URL = API_URL ? `${API_URL}/cookie` : null
+const COOKIE_GET_URL = API_URL ? `${API_URL}/cookie/count` : null
 
 interface FloatingCookie {
   id: number
@@ -16,6 +17,7 @@ export default function CookieClicker() {
   const [sending, setSending] = useState(false)
 
   useEffect(() => {
+    if (!COOKIE_GET_URL) return
     fetch(COOKIE_GET_URL)
       .then(res => res.json())
       .then(data => setCount(data.count ?? 0))
@@ -23,7 +25,7 @@ export default function CookieClicker() {
   }, [])
 
   const sendCookie = useCallback(async () => {
-    if (sending) return
+    if (sending || !COOKIE_POST_URL) return
     setSending(true)
 
     const id = Date.now() + Math.random()
@@ -34,10 +36,13 @@ export default function CookieClicker() {
     }, 1500)
 
     try {
-      await fetch(COOKIE_POST_URL, { method: 'POST' })
-      setCount(prev => (prev ?? 0) + 1)
+      const res = await fetch(COOKIE_POST_URL, { method: 'POST' })
+      if (res.ok) {
+        const data = await res.json()
+        setCount(data.count)
+      }
     } catch {
-      setCount(prev => (prev ?? 0) + 1)
+      // request failed — don't update count
     } finally {
       setSending(false)
     }
