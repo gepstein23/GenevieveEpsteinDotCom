@@ -227,10 +227,10 @@ resource "aws_sns_topic" "visitor_alerts" {
   name = "site-visitor-alerts"
 }
 
-resource "aws_sns_topic_subscription" "visitor_sms" {
+resource "aws_sns_topic_subscription" "visitor_email" {
   topic_arn = aws_sns_topic.visitor_alerts.arn
-  protocol  = "sms"
-  endpoint  = var.visitor_alert_phone
+  protocol  = "email"
+  endpoint  = var.visitor_alert_email
 }
 
 resource "aws_iam_role_policy" "lambda_sns" {
