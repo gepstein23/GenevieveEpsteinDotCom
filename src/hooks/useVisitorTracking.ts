@@ -1,14 +1,12 @@
 import { useEffect } from 'react'
-import { featureFlags } from '@/config/featureFlags'
+import { featureFlags, apiConfig } from '@/config/featureFlags'
 
-const API_URL = import.meta.env.VITE_COOKIE_API_URL
-const VISIT_URL = `${API_URL}/visit`
+const VISIT_URL = `${apiConfig.baseUrl}/visit`
 const SESSION_KEY = 'visitor_tracked'
 
 export function useVisitorTracking() {
   useEffect(() => {
     if (!featureFlags.visitorTracking) return
-    if (!API_URL) return
     if (sessionStorage.getItem(SESSION_KEY)) return
 
     sessionStorage.setItem(SESSION_KEY, '1')
