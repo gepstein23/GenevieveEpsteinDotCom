@@ -1,9 +1,12 @@
 import { DynamoDBClient, GetItemCommand, UpdateItemCommand, QueryCommand, PutItemCommand } from '@aws-sdk/client-dynamodb';
+import { SNSClient, PublishCommand } from '@aws-sdk/client-sns';
 import { randomUUID } from 'crypto';
 
 const db = new DynamoDBClient({});
+const sns = new SNSClient({});
 const TABLE = process.env.TABLE_NAME;
 const VISITORS_TABLE = process.env.VISITORS_TABLE_NAME;
+const VISITOR_SNS_TOPIC = process.env.VISITOR_SNS_TOPIC;
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN;
 
 const DEDUP_WINDOW_MS = 30 * 60 * 1000; // 30 minutes
@@ -218,6 +221,16 @@ export const handler = async (event) => {
         TableName: VISITORS_TABLE,
         Item: item,
       }));
+
+      // Send SMS notification
+      if (VISITOR_SNS_TOPIC) {
+        const location = [geo.city, geo.region, geo.country].filter(Boolean).join(', ') || 'Unknown';
+        const message = `New visitor: ${ip}\n${location}${geo.isp ? `\nISP: ${geo.isp}` : ''}`;
+        await sns.send(new PublishCommand({
+          TopicArn: VISITOR_SNS_TOPIC,
+          Message: message,
+        }));
+      }
 
       return respond(200, { ok: true });
     }

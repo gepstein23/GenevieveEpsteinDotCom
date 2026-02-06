@@ -90,6 +90,7 @@ resource "aws_lambda_function" "cookie" {
       TABLE_NAME          = aws_dynamodb_table.cookies.name
       VISITORS_TABLE_NAME = aws_dynamodb_table.visitors.name
       ALLOWED_ORIGIN      = var.allowed_origin
+      VISITOR_SNS_TOPIC   = aws_sns_topic.visitor_alerts.arn
     }
   }
 }
@@ -218,5 +219,31 @@ resource "aws_apigatewayv2_route" "post_visit" {
   api_id    = aws_apigatewayv2_api.cookie.id
   route_key = "POST /visit"
   target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+}
+
+# ── SNS: visitor notifications ──
+
+resource "aws_sns_topic" "visitor_alerts" {
+  name = "site-visitor-alerts"
+}
+
+resource "aws_sns_topic_subscription" "visitor_sms" {
+  topic_arn = aws_sns_topic.visitor_alerts.arn
+  protocol  = "sms"
+  endpoint  = var.visitor_alert_phone
+}
+
+resource "aws_iam_role_policy" "lambda_sns" {
+  name = "visitor-tracker-sns"
+  role = aws_iam_role.lambda.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = "sns:Publish"
+      Resource = aws_sns_topic.visitor_alerts.arn
+    }]
+  })
 }
 

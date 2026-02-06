@@ -9,3 +9,9 @@ variable "allowed_origin" {
   type        = string
   default     = "https://genevieveepstein.com"
 }
+
+variable "visitor_alert_phone" {
+  description = "Phone number for visitor alert SMS notifications (E.164 format)"
+  type        = string
+  default     = "+14158065125"
+}
