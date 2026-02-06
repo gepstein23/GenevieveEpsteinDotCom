@@ -222,6 +222,11 @@ export const content = {
       { id: 'resume' as SectionId, label: 'Resume' },
       { id: 'contact' as SectionId, label: 'Contact' },
     ],
+    pokerSim: {
+      label: 'Poker Sim',
+      url: 'https://pokersim.genevieveepstein.com',
+      badge: 'Live',
+    },
     hamburgerOpen: 'Close menu',
     hamburgerClosed: 'Open menu',
   },

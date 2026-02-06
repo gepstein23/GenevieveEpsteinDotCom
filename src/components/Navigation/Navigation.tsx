@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import Logo from '@/components/Logo/Logo'
 import { content } from '@/data/content'
+import { featureFlags } from '@/config/featureFlags'
 import type { SectionId } from '@/types'
 import styles from './Navigation.module.scss'
 
 const navItems = content.navigation.items
+const pokerSim = content.navigation.pokerSim
 
 export default function Navigation() {
   const [active, setActive] = useState<SectionId>('hero')
@@ -68,6 +70,20 @@ export default function Navigation() {
                 </button>
               </li>
             ))}
+            {featureFlags.pokerSimLink && (
+              <li>
+                <a
+                  href={pokerSim.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.pokerSimLink}
+                >
+                  <span className={styles.pokerSimIcon}>&#x2660;</span>
+                  {pokerSim.label}
+                  <span className={styles.pokerSimBadge}>{pokerSim.badge}</span>
+                </a>
+              </li>
+            )}
           </ul>
 
           {/* Mobile hamburger */}
@@ -109,6 +125,25 @@ export default function Navigation() {
                   </button>
                 </motion.li>
               ))}
+              {featureFlags.pokerSimLink && (
+                <motion.li
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 * (navItems.length + 1) }}
+                >
+                  <a
+                    href={pokerSim.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.mobilePokerSimLink}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <span className={styles.pokerSimIcon}>&#x2660;</span>
+                    {pokerSim.label}
+                    <span className={styles.pokerSimBadge}>{pokerSim.badge}</span>
+                  </a>
+                </motion.li>
+              )}
             </ul>
           </motion.div>
         )}
