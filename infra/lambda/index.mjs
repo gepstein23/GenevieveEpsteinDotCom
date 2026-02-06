@@ -1,8 +1,12 @@
-import { DynamoDBClient, GetItemCommand, UpdateItemCommand, QueryCommand } from '@aws-sdk/client-dynamodb';
+import { DynamoDBClient, GetItemCommand, UpdateItemCommand, QueryCommand, PutItemCommand } from '@aws-sdk/client-dynamodb';
+import { randomUUID } from 'crypto';
 
 const db = new DynamoDBClient({});
 const TABLE = process.env.TABLE_NAME;
+const VISITORS_TABLE = process.env.VISITORS_TABLE_NAME;
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN;
+
+const DEDUP_WINDOW_MS = 30 * 60 * 1000; // 30 minutes
 
 const MAX_BODY_BYTES = 512;
 
@@ -133,6 +137,89 @@ export const handler = async (event) => {
 
       // Anonymous click
       return respond(200, { count: globalCount, globalCount });
+    }
+
+    // ── POST /visit — record a visitor ──
+    if (method === 'POST' && path === '/visit') {
+      const ip = event.requestContext.http.sourceIp;
+      const userAgent = event.headers?.['user-agent'] ?? '';
+      const referrer = event.headers?.referer ?? '';
+
+      let visitPath = '/';
+      if (event.body) {
+        try {
+          const body = JSON.parse(event.body);
+          if (typeof body.path === 'string') visitPath = body.path.slice(0, 200);
+        } catch { /* ignore */ }
+      }
+
+      // Deduplicate: skip if same IP visited within the last 30 minutes
+      const now = new Date();
+      const cutoff = new Date(now.getTime() - DEDUP_WINDOW_MS).toISOString();
+      const recentResult = await db.send(new QueryCommand({
+        TableName: VISITORS_TABLE,
+        IndexName: 'ByIp',
+        KeyConditionExpression: 'ip = :ip AND #ts > :cutoff',
+        ExpressionAttributeNames: { '#ts': 'timestamp' },
+        ExpressionAttributeValues: {
+          ':ip': { S: ip },
+          ':cutoff': { S: cutoff },
+        },
+        Limit: 1,
+      }));
+
+      if (recentResult.Items && recentResult.Items.length > 0) {
+        return respond(200, { ok: true, dedup: true });
+      }
+
+      // Look up geolocation from ip-api.com
+      let geo = {};
+      try {
+        const geoRes = await fetch(
+          `http://ip-api.com/json/${encodeURIComponent(ip)}?fields=status,city,regionName,country,lat,lon,timezone,isp`
+        );
+        const geoData = await geoRes.json();
+        if (geoData.status === 'success') {
+          geo = {
+            city: geoData.city,
+            region: geoData.regionName,
+            country: geoData.country,
+            lat: geoData.lat,
+            lon: geoData.lon,
+            timezone: geoData.timezone,
+            isp: geoData.isp,
+          };
+        }
+      } catch (geoErr) {
+        console.error('Geolocation lookup failed:', geoErr);
+      }
+
+      const timestamp = now.toISOString();
+      const item = {
+        id: { S: randomUUID() },
+        pk: { S: 'VISIT' },
+        ip: { S: ip },
+        timestamp: { S: timestamp },
+        userAgent: { S: userAgent },
+        referrer: { S: referrer },
+        path: { S: visitPath },
+      };
+
+      // Add geo fields if available
+      if (geo.city) item.city = { S: geo.city };
+      if (geo.region) item.region = { S: geo.region };
+      if (geo.country) item.country = { S: geo.country };
+      if (geo.lat != null) item.lat = { N: String(geo.lat) };
+      if (geo.lon != null) item.lon = { N: String(geo.lon) };
+      if (geo.timezone) item.timezone = { S: geo.timezone };
+      if (geo.isp) item.isp = { S: geo.isp };
+
+      await db.send(new PutItemCommand({
+        TableName: VISITORS_TABLE,
+        Item: item,
+      }));
+
+      return respond(200, { ok: true });
     }
 
     return respond(405, { error: 'Method not allowed' });

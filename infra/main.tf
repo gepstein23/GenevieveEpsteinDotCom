@@ -87,8 +87,9 @@ resource "aws_lambda_function" "cookie" {
 
   environment {
     variables = {
-      TABLE_NAME     = aws_dynamodb_table.cookies.name
-      ALLOWED_ORIGIN = var.allowed_origin
+      TABLE_NAME          = aws_dynamodb_table.cookies.name
+      VISITORS_TABLE_NAME = aws_dynamodb_table.visitors.name
+      ALLOWED_ORIGIN      = var.allowed_origin
     }
   }
 }
@@ -150,3 +151,72 @@ resource "aws_lambda_permission" "apigw" {
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.cookie.execution_arn}/*/*"
 }
+
+# ── DynamoDB: visitor tracking ──
+
+resource "aws_dynamodb_table" "visitors" {
+  name         = "site-visitors"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "id"
+
+  attribute {
+    name = "id"
+    type = "S"
+  }
+
+  attribute {
+    name = "pk"
+    type = "S"
+  }
+
+  attribute {
+    name = "timestamp"
+    type = "S"
+  }
+
+  attribute {
+    name = "ip"
+    type = "S"
+  }
+
+  global_secondary_index {
+    name            = "ByTimestamp"
+    hash_key        = "pk"
+    range_key       = "timestamp"
+    projection_type = "ALL"
+  }
+
+  global_secondary_index {
+    name            = "ByIp"
+    hash_key        = "ip"
+    range_key       = "timestamp"
+    projection_type = "KEYS_ONLY"
+  }
+}
+
+# ── Visitor tracking: Lambda permissions + routes ──
+
+resource "aws_iam_role_policy" "lambda_visitors_dynamo" {
+  name = "visitor-tracker-dynamo"
+  role = aws_iam_role.lambda.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = ["dynamodb:PutItem", "dynamodb:Query"]
+      Resource = [
+        aws_dynamodb_table.visitors.arn,
+        "${aws_dynamodb_table.visitors.arn}/index/ByTimestamp",
+        "${aws_dynamodb_table.visitors.arn}/index/ByIp"
+      ]
+    }]
+  })
+}
+
+resource "aws_apigatewayv2_route" "post_visit" {
+  api_id    = aws_apigatewayv2_api.cookie.id
+  route_key = "POST /visit"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+}
+

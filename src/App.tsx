@@ -8,6 +8,7 @@ import ScrollProgress from '@/components/ScrollProgress/ScrollProgress'
 import Footer from '@/components/Footer/Footer'
 import CookieClicker from '@/components/CookieClicker/CookieClicker'
 import { featureFlags } from '@/config/featureFlags'
+import { useVisitorTracking } from '@/hooks/useVisitorTracking'
 import HeroSection from '@/sections/HeroSection/HeroSection'
 import AboutSection from '@/sections/AboutSection/AboutSection'
 import ProjectsSection from '@/sections/ProjectsSection/ProjectsSection'
@@ -16,6 +17,8 @@ import ContactSection from '@/sections/ContactSection/ContactSection'
 import styles from '@/App.module.scss'
 
 export default function App() {
+  useVisitorTracking()
+
   return (
     <CursorProvider>
       <CustomCursor />
