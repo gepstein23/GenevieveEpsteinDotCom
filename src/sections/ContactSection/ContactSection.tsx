@@ -65,12 +65,6 @@ export default function ContactSection() {
   return (
     <section id="contact" className={styles.contact}>
       <SectionReveal>
-        <h2 className={styles.heading}>
-          <span className={styles.accent}>//</span> {content.contact.heading}
-        </h2>
-      </SectionReveal>
-
-      <SectionReveal delay={0.1}>
         <h3 className={styles.interestsHeading}>{content.about.interestsHeading}</h3>
         <div className={styles.interests}>
           {[...content.about.interests].map((item, i) => (
@@ -80,6 +74,12 @@ export default function ContactSection() {
             </span>
           ))}
         </div>
+      </SectionReveal>
+
+      <SectionReveal delay={0.1}>
+        <h2 className={styles.heading}>
+          <span className={styles.accent}>//</span> {content.contact.heading}
+        </h2>
       </SectionReveal>
 
       <SectionReveal delay={0.15}>
