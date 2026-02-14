@@ -57,8 +57,8 @@ export default function App() {
         <main className={styles.main}>
           <HeroSection />
           <AboutSection />
-          <ProjectsSection />
           <ResumeSection />
+          <ProjectsSection />
           <ContactSection />
         </main>
 

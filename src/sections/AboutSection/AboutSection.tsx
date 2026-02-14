@@ -32,17 +32,6 @@ export default function AboutSection() {
         </div>
       </SectionReveal>
 
-      <SectionReveal direction="up" delay={0.25}>
-        <h3 className={styles.interestsHeading}>{content.about.interestsHeading}</h3>
-        <div className={styles.interests}>
-          {[...content.about.interests].map((item, i) => (
-            <span key={i} className={styles.chip}>
-              <span className={styles.chipEmoji}>{item.emoji}</span>
-              {item.label}
-            </span>
-          ))}
-        </div>
-      </SectionReveal>
     </section>
   )
 }

@@ -70,6 +70,18 @@ export default function ContactSection() {
         </h2>
       </SectionReveal>
 
+      <SectionReveal delay={0.1}>
+        <h3 className={styles.interestsHeading}>{content.about.interestsHeading}</h3>
+        <div className={styles.interests}>
+          {[...content.about.interests].map((item, i) => (
+            <span key={i} className={styles.chip}>
+              <span className={styles.chipEmoji}>{item.emoji}</span>
+              {item.label}
+            </span>
+          ))}
+        </div>
+      </SectionReveal>
+
       <SectionReveal delay={0.15}>
         <p className={styles.subtext}>{content.contact.subtext}</p>
       </SectionReveal>
