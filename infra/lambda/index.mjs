@@ -246,6 +246,41 @@ export const handler = async (event) => {
       return respond(200, { ok: true });
     }
 
+    // ── POST /click — record a button click ──
+    if (method === 'POST' && path === '/click') {
+      let label = '';
+      if (event.body) {
+        try {
+          const body = JSON.parse(event.body);
+          if (typeof body.label === 'string') label = body.label.slice(0, 100);
+        } catch { /* ignore */ }
+      }
+
+      const ip = event.requestContext.http.sourceIp;
+      const now = new Date();
+      const timestamp = now.toISOString();
+      const estTimestamp = now.toLocaleString('en-US', {
+        timeZone: 'America/New_York',
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', second: '2-digit',
+        hour12: false,
+      });
+
+      await db.send(new PutItemCommand({
+        TableName: VISITORS_TABLE,
+        Item: {
+          id: { S: randomUUID() },
+          pk: { S: 'CLICK' },
+          ip: { S: ip },
+          timestamp: { S: timestamp },
+          timestampEST: { S: estTimestamp },
+          label: { S: label },
+        },
+      }));
+
+      return respond(200, { ok: true });
+    }
+
     return respond(405, { error: 'Method not allowed' });
   } catch (err) {
     console.error(err);

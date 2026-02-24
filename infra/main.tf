@@ -84,6 +84,7 @@ resource "aws_lambda_function" "cookie" {
   runtime          = "nodejs20.x"
   filename         = data.archive_file.lambda.output_path
   source_code_hash = data.archive_file.lambda.output_base64sha256
+  timeout          = 10
 
   environment {
     variables = {
@@ -260,6 +261,12 @@ resource "aws_iam_role_policy" "lambda_visitors_dynamo" {
 resource "aws_apigatewayv2_route" "post_visit" {
   api_id    = aws_apigatewayv2_api.cookie.id
   route_key = "POST /visit"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+}
+
+resource "aws_apigatewayv2_route" "post_click" {
+  api_id    = aws_apigatewayv2_api.cookie.id
+  route_key = "POST /click"
   target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
 }
 

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import Logo from '@/components/Logo/Logo'
 import { content } from '@/data/content'
 import { featureFlags } from '@/config/featureFlags'
+import { trackClick } from '@/hooks/useVisitorTracking'
 import type { SectionId } from '@/types'
 import styles from './Navigation.module.scss'
 
@@ -35,8 +36,9 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleClick = (id: SectionId) => {
+  const handleClick = (id: SectionId, label?: string) => {
     setMenuOpen(false)
+    trackClick(`nav:${label ?? id}`)
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }
 
@@ -57,7 +59,7 @@ export default function Navigation() {
               <li key={id}>
                 <button
                   className={`${styles.link} ${active === id ? styles.active : ''}`}
-                  onClick={() => handleClick(id)}
+                  onClick={() => handleClick(id, label)}
                 >
                   {label}
                   {active === id && (
@@ -119,7 +121,7 @@ export default function Navigation() {
                 >
                   <button
                     className={`${styles.mobileLink} ${active === id ? styles.mobileActive : ''}`}
-                    onClick={() => handleClick(id)}
+                    onClick={() => handleClick(id, label)}
                   >
                     {label}
                   </button>

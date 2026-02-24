@@ -3,6 +3,7 @@ import TypewriterText from '@/components/TypewriterText/TypewriterText'
 import MagneticButton from '@/components/MagneticButton/MagneticButton'
 import ScrollIndicator from '@/components/ScrollIndicator/ScrollIndicator'
 import { content } from '@/data/content'
+import { trackClick } from '@/hooks/useVisitorTracking'
 import headshotImg from '@/assets/genevieve-headshot_2025.jpg'
 import styles from './HeroSection.module.scss'
 
@@ -37,10 +38,10 @@ export default function HeroSection() {
 
         {/* Buttons — appear last */}
         <div className={styles.actions}>
-          <MagneticButton href="#resume" variant="primary">
+          <MagneticButton href="#resume" variant="primary" onClick={() => trackClick('hero:View My Work')}>
             {content.hero.ctaPrimary}
           </MagneticButton>
-          <MagneticButton href="#contact" variant="secondary">
+          <MagneticButton href="#contact" variant="secondary" onClick={() => trackClick('hero:Get In Touch')}>
             {content.hero.ctaSecondary}
           </MagneticButton>
         </div>
