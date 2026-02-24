@@ -37,7 +37,7 @@ export default function HeroSection() {
 
         {/* Buttons — appear last */}
         <div className={styles.actions}>
-          <MagneticButton href="#projects" variant="primary">
+          <MagneticButton href="#resume" variant="primary">
             {content.hero.ctaPrimary}
           </MagneticButton>
           <MagneticButton href="#contact" variant="secondary">

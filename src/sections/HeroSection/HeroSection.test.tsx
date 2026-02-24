@@ -42,11 +42,11 @@ describe('HeroSection', () => {
     ).toBeInTheDocument()
   })
 
-  it('renders the View My Work button linking to projects', () => {
+  it('renders the View My Work button linking to experience', () => {
     render(<HeroSection />)
     const link = screen.getByRole('link', { name: 'View My Work' })
     expect(link).toBeInTheDocument()
-    expect(link).toHaveAttribute('href', '#projects')
+    expect(link).toHaveAttribute('href', '#resume')
   })
 
   it('renders the Get In Touch button linking to contact', () => {

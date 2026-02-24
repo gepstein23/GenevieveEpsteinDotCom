@@ -179,7 +179,7 @@ export const handler = async (event) => {
       let geo = {};
       try {
         const geoRes = await fetch(
-          `http://ip-api.com/json/${encodeURIComponent(ip)}?fields=status,city,regionName,country,lat,lon,timezone,isp`
+          `http://ip-api.com/json/${encodeURIComponent(ip)}?fields=status,city,regionName,country,lat,lon,isp`
         );
         const geoData = await geoRes.json();
         if (geoData.status === 'success') {
@@ -189,7 +189,6 @@ export const handler = async (event) => {
             country: geoData.country,
             lat: geoData.lat,
             lon: geoData.lon,
-            timezone: geoData.timezone,
             isp: geoData.isp,
           };
         }
@@ -197,24 +196,36 @@ export const handler = async (event) => {
         console.error('Geolocation lookup failed:', geoErr);
       }
 
+      // Convert timestamp to EST
+      const estTimestamp = now.toLocaleString('en-US', {
+        timeZone: 'America/New_York',
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', second: '2-digit',
+        hour12: false,
+      });
+
+      // Build combined location string: "City, State, Country"
+      const location = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
+
+      // Build high-precision lat,lon string
+      const latLon = (geo.lat != null && geo.lon != null)
+        ? `${geo.lat.toFixed(8)},${geo.lon.toFixed(8)}`
+        : '';
+
       const timestamp = now.toISOString();
       const item = {
         id: { S: randomUUID() },
         pk: { S: 'VISIT' },
         ip: { S: ip },
         timestamp: { S: timestamp },
+        timestampEST: { S: estTimestamp },
         userAgent: { S: userAgent },
         referrer: { S: referrer },
         path: { S: visitPath },
       };
 
-      // Add geo fields if available
-      if (geo.city) item.city = { S: geo.city };
-      if (geo.region) item.region = { S: geo.region };
-      if (geo.country) item.country = { S: geo.country };
-      if (geo.lat != null) item.lat = { N: String(geo.lat) };
-      if (geo.lon != null) item.lon = { N: String(geo.lon) };
-      if (geo.timezone) item.timezone = { S: geo.timezone };
+      if (location) item.location = { S: location };
+      if (latLon) item.latLon = { S: latLon };
       if (geo.isp) item.isp = { S: geo.isp };
 
       await db.send(new PutItemCommand({
@@ -222,10 +233,10 @@ export const handler = async (event) => {
         Item: item,
       }));
 
-      // Send SMS notification
+      // Send SNS notification
       if (VISITOR_SNS_TOPIC) {
-        const location = [geo.city, geo.region, geo.country].filter(Boolean).join(', ') || 'Unknown';
-        const message = `New visitor: ${ip}\n${location}${geo.isp ? `\nISP: ${geo.isp}` : ''}`;
+        const snsLocation = location || 'Unknown';
+        const message = `New visitor: ${ip}\n${snsLocation}${geo.isp ? `\nISP: ${geo.isp}` : ''}`;
         await sns.send(new PublishCommand({
           TopicArn: VISITOR_SNS_TOPIC,
           Message: message,

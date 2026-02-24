@@ -88,7 +88,7 @@ resource "aws_lambda_function" "cookie" {
   environment {
     variables = {
       TABLE_NAME          = aws_dynamodb_table.cookies.name
-      VISITORS_TABLE_NAME = aws_dynamodb_table.visitors.name
+      VISITORS_TABLE_NAME = aws_dynamodb_table.visitors_v2.name
       ALLOWED_ORIGIN      = var.allowed_origin
       VISITOR_SNS_TOPIC   = aws_sns_topic.visitor_alerts.arn
     }
@@ -195,6 +195,48 @@ resource "aws_dynamodb_table" "visitors" {
   }
 }
 
+# ── DynamoDB: visitor tracking v2 (consolidated columns) ──
+
+resource "aws_dynamodb_table" "visitors_v2" {
+  name         = "site-visitors-v2"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "id"
+
+  attribute {
+    name = "id"
+    type = "S"
+  }
+
+  attribute {
+    name = "pk"
+    type = "S"
+  }
+
+  attribute {
+    name = "timestamp"
+    type = "S"
+  }
+
+  attribute {
+    name = "ip"
+    type = "S"
+  }
+
+  global_secondary_index {
+    name            = "ByTimestamp"
+    hash_key        = "pk"
+    range_key       = "timestamp"
+    projection_type = "ALL"
+  }
+
+  global_secondary_index {
+    name            = "ByIp"
+    hash_key        = "ip"
+    range_key       = "timestamp"
+    projection_type = "KEYS_ONLY"
+  }
+}
+
 # ── Visitor tracking: Lambda permissions + routes ──
 
 resource "aws_iam_role_policy" "lambda_visitors_dynamo" {
@@ -207,9 +249,9 @@ resource "aws_iam_role_policy" "lambda_visitors_dynamo" {
       Effect   = "Allow"
       Action   = ["dynamodb:PutItem", "dynamodb:Query"]
       Resource = [
-        aws_dynamodb_table.visitors.arn,
-        "${aws_dynamodb_table.visitors.arn}/index/ByTimestamp",
-        "${aws_dynamodb_table.visitors.arn}/index/ByIp"
+        aws_dynamodb_table.visitors_v2.arn,
+        "${aws_dynamodb_table.visitors_v2.arn}/index/ByTimestamp",
+        "${aws_dynamodb_table.visitors_v2.arn}/index/ByIp"
       ]
     }]
   })
