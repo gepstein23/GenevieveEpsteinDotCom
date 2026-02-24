@@ -32,7 +32,7 @@ export default function Footer() {
         <p className={styles.copyright}>
           &copy; {new Date().getFullYear()} {content.meta.name}
         </p>
-        <p className={styles.tagline}>{content.footer.tagline}</p>
+
       </div>
     </footer>
   )

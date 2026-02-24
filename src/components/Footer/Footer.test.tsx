@@ -9,11 +9,6 @@ describe('Footer', () => {
     expect(screen.getByText(new RegExp(year))).toBeInTheDocument()
   })
 
-  it('renders the tagline', () => {
-    render(<Footer />)
-    expect(screen.getByText('Built with curiosity & code')).toBeInTheDocument()
-  })
-
   it('renders both gallery photos', () => {
     render(<Footer />)
     expect(
