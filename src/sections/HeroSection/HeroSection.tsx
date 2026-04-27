@@ -1,4 +1,3 @@
-import GlitchText from '@/components/GlitchText/GlitchText'
 import TypewriterText from '@/components/TypewriterText/TypewriterText'
 import MagneticButton from '@/components/MagneticButton/MagneticButton'
 import ScrollIndicator from '@/components/ScrollIndicator/ScrollIndicator'
@@ -28,7 +27,7 @@ export default function HeroSection() {
 
         {/* Name — visible from first paint, dramatic blur/scale entrance */}
         <div className={styles.nameWrap}>
-          <GlitchText text={content.meta.name} as="h1" />
+          <h1>{content.meta.name}</h1>
         </div>
 
         {/* Tagline — fades in after greeting */}

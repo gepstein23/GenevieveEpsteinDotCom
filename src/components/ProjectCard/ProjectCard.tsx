@@ -30,12 +30,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     if (!node || prefersReduced) return
 
     VanillaTilt.init(node, {
-      max: 12,
+      max: 5,
       speed: 400,
       glare: true,
-      'max-glare': 0.2,
+      'max-glare': 0.08,
       perspective: 1000,
-      scale: 1.02,
+      scale: 1.01,
     })
 
     return () => {

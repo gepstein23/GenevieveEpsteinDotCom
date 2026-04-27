@@ -49,12 +49,10 @@ describe('ResumeSection', () => {
     expect(screen.getByText('Graduated December 2021')).toBeInTheDocument()
   })
 
-  it('renders all four tech stack categories', () => {
+  it('renders both tech stack categories', () => {
     render(<ResumeSection />)
     expect(screen.getByText('Languages')).toBeInTheDocument()
-    expect(screen.getByText('Frameworks & Libraries')).toBeInTheDocument()
-    expect(screen.getByText('Cloud & Infrastructure')).toBeInTheDocument()
-    expect(screen.getByText('Tools & Observability')).toBeInTheDocument()
+    expect(screen.getByText('Tools & Platforms')).toBeInTheDocument()
   })
 
   it('renders every skill from the data', () => {
@@ -89,7 +87,7 @@ describe('ResumeSection', () => {
   it('highlights Java and Terraform with a special class', () => {
     render(<ResumeSection />)
     const javaTag = screen.getByText('Java')
-    const terraformTag = screen.getByText('Terraform')
+    const terraformTag = screen.getByText('Terraform/HCL')
     // Both should have the highlighted class
     expect(javaTag.className).toContain('tagHighlighted')
     expect(terraformTag.className).toContain('tagHighlighted')

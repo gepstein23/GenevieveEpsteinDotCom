@@ -246,17 +246,17 @@
 }
 
 .tagHighlighted {
-  background: linear-gradient(135deg, rgba(255, 0, 110, 0.25), rgba(0, 245, 212, 0.25));
+  background: linear-gradient(135deg, rgba(224, 82, 122, 0.2), rgba(91, 196, 181, 0.2));
   border-width: 2px;
   border-color: var(--color-accent-pink) !important;
   font-weight: 700;
   color: #fff;
   font-size: calc(var(--text-xs) + 1px);
   padding: 4px 12px;
-  box-shadow: 0 0 12px rgba(255, 0, 110, 0.3), 0 0 12px rgba(0, 245, 212, 0.3);
+  box-shadow: 0 0 8px rgba(224, 82, 122, 0.2), 0 0 8px rgba(91, 196, 181, 0.2);
 
   &:hover {
-    box-shadow: 0 0 20px rgba(255, 0, 110, 0.5), 0 0 20px rgba(0, 245, 212, 0.5);
+    box-shadow: 0 0 14px rgba(224, 82, 122, 0.35), 0 0 14px rgba(91, 196, 181, 0.35);
   }
 }
 

@@ -10,18 +10,18 @@
 :root {
   /* ── Color Palette ── */
   /* Dark backgrounds with neon accents create the "creative/artistic" vibe */
-  --color-bg-primary: #0a0a0f;
-  --color-bg-secondary: #12121a;
+  --color-bg-primary: #0c0c14;
+  --color-bg-secondary: #141420;
   --color-bg-elevated: rgba(255, 255, 255, 0.03);
 
   --color-text-primary: #f0f0f0;
   --color-text-secondary: #a0a0b0;
   --color-text-muted: #606070;
 
-  /* Neon accent colors — the signature look of the site */
-  --color-accent-pink: #ff006e;
-  --color-accent-cyan: #00f5d4;
-  --color-accent-purple: #7b2ff7;
+  /* Accent colors — muted for a professional feel */
+  --color-accent-pink: #e0527a;
+  --color-accent-cyan: #5bc4b5;
+  --color-accent-purple: #6366b3;
 
   /* Glassmorphism surface */
   --color-glass-bg: rgba(255, 255, 255, 0.05);

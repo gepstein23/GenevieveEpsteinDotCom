@@ -20,9 +20,9 @@ export const content = {
     greeting: "Hello, I'm",
     taglines: [
       'Senior Software Engineer',
-      'Mentor and Leader',
-      'Cloud-Native Engineer',
-      'Backend Systems Builder',
+      'Technical Leader',
+      'Event-Driven Architecture',
+      'Fraud Detection Infrastructure',
     ],
     ctaPrimary: 'View My Work',
     ctaSecondary: 'Get In Touch',
@@ -32,12 +32,12 @@ export const content = {
   about: {
     heading: 'About Me',
     bio: [
-      'Senior Software Engineer specializing in large-scale backend systems and cloud-native infrastructure, with a proven record of delivering high-impact features on AWS that reduce fraud, cost, and operational overhead.',
+      'Senior Software Engineer with 5+ years of experience designing and delivering high-throughput, event-driven systems on AWS. Proven track record in fraud detection infrastructure, real-time data pipelines, and cross-team technical leadership — reducing fraud, cost, and operational overhead at scale.',
       "When I'm not building or optimizing systems, nor busy on-call, you can find me playing cello, snowboarding, travelling, or deep in a tournament of Texas Hold 'Em.",
     ],
     interestsHeading: "When I'm not coding",
     interests: [
-      { emoji: '\u{1F3BB}', label: 'Cello & Viola' },
+      { emoji: '\u{1F3BB}', label: 'Orchestra (Cello & Viola)' },
       { emoji: '\u{1F3C2}', label: 'Snowboarding' },
       { emoji: '\u{1F5A8}\uFE0F', label: '3D Printing' },
       { emoji: '\u{1F6B4}', label: 'SoulCycle' },
@@ -57,7 +57,7 @@ export const content = {
         id: 'poker-high-hand',
         title: 'Poker High Hand Simulator',
         description:
-          'Researching the optimization of High Hand promotions using Monte Carlo Tree Search. A memory-efficient Java app performing adjustable simulations with custom card-playing mechanics, React UI, animations, and ML capabilities — hosted on AWS EC2 and AWS Amplify.',
+          'Optimizing High Hand poker promotions using Monte Carlo Tree Search. A memory-efficient Java simulation engine with a React UI, CI/CD pipeline via GitHub Actions, and WAF-secured AWS hosting on EC2 and Amplify.',
         techStack: ['Java', 'React', 'AWS EC2', 'AWS Amplify', 'MCTS'],
         sourceUrl: 'https://github.com/gepstein23/PokerHighHandSimulator',
         liveUrl: 'https://pokersim.genevieveepstein.com',
@@ -82,12 +82,11 @@ export const content = {
       { end: 3000, suffix: '+', label: 'reqs/sec handled' },
       { end: 51000, suffix: '+', label: 'fraudsters suspended' },
       { end: 3450000, suffix: '+', label: 'hours of potential fraud prevented' },
+      { end: 1500, suffix: '+', label: 'analyst hours saved annually' },
     ],
     categories: [
       { key: 'languages', label: 'Languages', color: 'var(--color-text-secondary)' },
-      { key: 'frameworks', label: 'Frameworks & Libraries', color: 'var(--color-accent-purple)' },
-      { key: 'cloud', label: 'Cloud & Infrastructure', color: 'var(--color-accent-pink)' },
-      { key: 'tools', label: 'Tools & Observability', color: 'var(--color-accent-cyan)' },
+      { key: 'tools-platforms', label: 'Tools & Platforms', color: 'var(--color-accent-cyan)' },
     ] as const,
     techStackHeading: 'Tech Stack',
     education: {
@@ -113,10 +112,10 @@ export const content = {
         companyUrl: 'https://www.fanduel.com',
         period: 'Jul 2024 — Present',
         description: [
-          'Led design and delivery of fraud mitigation features on AWS and Confluent using event-driven architectures, resulting in 51,000+ fraudulent account suspensions and 3.45M+ hours of potential fraud prevented.',
-          'Drove process and operational improvements, including abstracting 3 algorithms into shared libraries and redesigning a Flink feature to cut cost by 98%.',
-          'Emerged as de facto technical lead by aligning cross-team work, coordinating with external vendors, and executing 9 emergency releases for time-sensitive requests.',
-          'Supported mission-critical, high-throughput services (withdrawals and login flows up to 3,000 reqs/sec) and delivered multiple external vendor integrations.',
+          'Designed and delivered real-time fraud detection pipelines on AWS and Confluent Kafka, resulting in 51,000+ fraudulent account suspensions and 3.45M+ hours of potential fraud prevented.',
+          'Built ML-powered decisioning services that automated analyst workflows, saving 1,500+ analyst hours annually while improving detection accuracy.',
+          'Executed 10+ emergency releases for time-sensitive fraud vectors, coordinating cross-team response and external vendor integrations under tight deadlines.',
+          'Redesigned a Flink streaming feature to cut costs by 98% and led microservices migration from monolith, improving deployment velocity and system resilience.',
         ],
       },
       {
@@ -126,10 +125,10 @@ export const content = {
         companyUrl: 'https://www.broadcom.com/vmware',
         period: 'Feb 2023 — Jul 2024',
         description: [
-          'Developed 2 of 4 core VM cloning methods, improving performance by ~80%, reducing process time from days to hours.',
-          'Introduced 2 of 4 supported VM types, including one driving a cross-team rearchitecture of backup/failover management.',
-          'Designed and launched a log parsing/querying tool adopted across teams, significantly reducing debugging time.',
-          'Supported cross-functional teams by triaging 5,000+ test failures and mentoring peers.',
+          'Delivered multi-product rearchitecture spanning 3 teams, introducing 2 of 4 supported VM types and driving cross-team redesign of backup/failover management.',
+          'Built and launched an internal log parsing/querying tool adopted org-wide, significantly reducing debugging time across engineering.',
+          'Founded the API design guild and mentored 2 interns through full project lifecycles, establishing patterns adopted across the organization.',
+          'Developed 2 of 4 core VM cloning methods, improving performance by ~80% and reducing process time from days to hours.',
         ],
       },
       {
@@ -160,40 +159,34 @@ export const content = {
   skills: [
     // Languages
     { name: 'Java', category: 'languages', highlighted: true },
-    { name: 'Terraform', category: 'languages', highlighted: true },
     { name: 'Python', category: 'languages' },
-    { name: 'TypeScript', category: 'languages' },
+    { name: 'Bash', category: 'languages' },
     { name: 'SQL', category: 'languages' },
     { name: 'C#', category: 'languages' },
     { name: 'C++', category: 'languages' },
-    { name: 'Bash', category: 'languages' },
 
-    // Frameworks & Libraries
-    { name: 'Spring', category: 'frameworks' },
-    { name: 'Hibernate', category: 'frameworks' },
-    { name: 'React', category: 'frameworks' },
-    { name: 'Kafka', category: 'frameworks' },
-    { name: 'Flink', category: 'frameworks' },
-    { name: 'Confluent', category: 'frameworks' },
-    { name: 'REST APIs', category: 'frameworks' },
-    { name: 'Maven', category: 'frameworks' },
-    { name: 'Gradle', category: 'frameworks' },
-
-    // Cloud & Infrastructure
-    { name: 'AWS', category: 'cloud' },
-    { name: 'EC2', category: 'cloud' },
-    { name: 'Amplify', category: 'cloud' },
-    { name: 'Lambda', category: 'cloud' },
-    { name: 'Docker', category: 'cloud' },
-    { name: 'CI/CD', category: 'cloud' },
-
-    // Tools & Observability
-    { name: 'DataDog', category: 'tools' },
-    { name: 'BuildKite', category: 'tools' },
-    { name: 'PagerDuty', category: 'tools' },
-    { name: 'Git', category: 'tools' },
-    { name: 'IntelliJ', category: 'tools' },
-    { name: 'HTML/CSS', category: 'tools' },
+    // Tools & Platforms
+    { name: 'Terraform/HCL', category: 'tools-platforms', highlighted: true },
+    { name: 'AWS', category: 'tools-platforms' },
+    { name: 'Lambda', category: 'tools-platforms' },
+    { name: 'API Gateway', category: 'tools-platforms' },
+    { name: 'SQS', category: 'tools-platforms' },
+    { name: 'SNS', category: 'tools-platforms' },
+    { name: 'EventBridge', category: 'tools-platforms' },
+    { name: 'CloudWatch', category: 'tools-platforms' },
+    { name: 'EC2', category: 'tools-platforms' },
+    { name: 'ECR', category: 'tools-platforms' },
+    { name: 'ECS', category: 'tools-platforms' },
+    { name: 'S3', category: 'tools-platforms' },
+    { name: 'Confluent Kafka', category: 'tools-platforms' },
+    { name: 'Flink', category: 'tools-platforms' },
+    { name: 'Docker', category: 'tools-platforms' },
+    { name: 'Datadog', category: 'tools-platforms' },
+    { name: 'Maven', category: 'tools-platforms' },
+    { name: 'Gradle', category: 'tools-platforms' },
+    { name: 'Spring', category: 'tools-platforms' },
+    { name: 'Hibernate', category: 'tools-platforms' },
+    { name: 'PagerDuty', category: 'tools-platforms' },
   ] satisfies Skill[],
 
   contact: {

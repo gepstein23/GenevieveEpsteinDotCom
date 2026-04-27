@@ -1,4 +1,4 @@
-import { useRef, useState, type ReactNode, type MouseEvent } from 'react'
+import { useRef, type ReactNode, type MouseEvent } from 'react'
 import { motion, useMotionValue, useSpring } from 'motion/react'
 import styles from './MagneticButton.module.scss'
 
@@ -9,14 +9,6 @@ interface MagneticButtonProps {
   variant?: 'primary' | 'secondary'
 }
 
-interface Sparkle {
-  id: number
-  x: number
-  y: number
-}
-
-let sparkleId = 0
-
 export default function MagneticButton({
   children,
   onClick,
@@ -24,7 +16,6 @@ export default function MagneticButton({
   variant = 'primary',
 }: MagneticButtonProps) {
   const ref = useRef<HTMLElement>(null)
-  const [sparkles, setSparkles] = useState<Sparkle[]>([])
 
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -45,18 +36,7 @@ export default function MagneticButton({
     y.set(0)
   }
 
-  const handleClick = (e: MouseEvent) => {
-    if (!ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    const newSparkles: Sparkle[] = Array.from({ length: 6 }, () => ({
-      id: ++sparkleId,
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    }))
-    setSparkles((s) => [...s, ...newSparkles])
-    setTimeout(() => {
-      setSparkles((s) => s.filter((sp) => !newSparkles.includes(sp)))
-    }, 600)
+  const handleClick = () => {
     onClick?.()
   }
 
@@ -72,18 +52,6 @@ export default function MagneticButton({
     whileTap: { scale: 0.95 },
   }
 
-  const sparkleElements = sparkles.map((s, i) => (
-    <span
-      key={s.id}
-      className={styles.sparkle}
-      style={{
-        left: s.x,
-        top: s.y,
-        '--angle': `${(i % 6) * 60}deg`,
-      } as React.CSSProperties}
-    />
-  ))
-
   if (href) {
     return (
       <motion.a
@@ -92,7 +60,6 @@ export default function MagneticButton({
         href={href}
       >
         {children}
-        {sparkleElements}
       </motion.a>
     )
   }
@@ -100,7 +67,6 @@ export default function MagneticButton({
   return (
     <motion.button {...sharedProps}>
       {children}
-      {sparkleElements}
     </motion.button>
   )
 }

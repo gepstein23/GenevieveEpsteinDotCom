@@ -14,16 +14,16 @@ export const particlesConfig: ISourceOptions = {
   fullScreen: false,
   particles: {
     number: {
-      value: 40,
+      value: 20,
       density: {
         enable: true,
       },
     },
     color: {
-      value: ['#ff006e', '#7b2ff7', '#00f5d4'],
+      value: ['#e0527a', '#6366b3', '#5bc4b5'],
     },
     opacity: {
-      value: { min: 0.2, max: 0.5 },
+      value: { min: 0.1, max: 0.3 },
     },
     size: {
       value: { min: 3, max: 8 },
@@ -37,11 +37,7 @@ export const particlesConfig: ISourceOptions = {
       },
     },
     links: {
-      enable: true,
-      distance: 150,
-      color: '#ffffff',
-      opacity: 0.12,
-      width: 2,
+      enable: false,
     },
   },
   interactivity: {

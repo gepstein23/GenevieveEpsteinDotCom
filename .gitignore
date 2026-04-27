@@ -28,5 +28,6 @@ dist-ssr
 infra/.terraform/
 infra/*.tfstate
 infra/*.tfstate.backup
+infra/*.tfstate.*.backup
 infra/.terraform.lock.hcl
 infra/lambda/function.zip

@@ -11,7 +11,7 @@
 }
 
 .scrolled {
-  background: rgba(10, 10, 15, 0.8);
+  background: rgba(12, 12, 20, 0.8);
   backdrop-filter: blur(var(--blur-glass));
   -webkit-backdrop-filter: blur(var(--blur-glass));
   border-bottom: 1px solid var(--color-glass-border);
@@ -78,8 +78,8 @@
   color: var(--color-accent-cyan);
   padding: var(--space-sm) var(--space-md);
   border-radius: 8px;
-  border: 1px solid rgba(0, 245, 212, 0.25);
-  background: rgba(0, 245, 212, 0.06);
+  border: 1px solid rgba(91, 196, 181, 0.25);
+  background: rgba(91, 196, 181, 0.06);
   cursor: pointer;
   transition:
     color var(--transition-fast),
@@ -89,9 +89,9 @@
 
   &:hover {
     color: var(--color-text-primary);
-    background: rgba(0, 245, 212, 0.12);
-    border-color: rgba(0, 245, 212, 0.4);
-    box-shadow: 0 0 12px rgba(0, 245, 212, 0.2);
+    background: rgba(91, 196, 181, 0.12);
+    border-color: rgba(91, 196, 181, 0.4);
+    box-shadow: 0 0 12px rgba(91, 196, 181, 0.15);
   }
 }
 
@@ -113,22 +113,8 @@
   background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-purple));
   border-radius: 10px;
   box-shadow:
-    0 0 8px rgba(255, 0, 110, 0.4),
-    0 0 16px rgba(123, 47, 247, 0.2);
-  animation: badgePulse 2s ease-in-out infinite;
-}
-
-@keyframes badgePulse {
-  0%, 100% {
-    box-shadow:
-      0 0 8px rgba(255, 0, 110, 0.4),
-      0 0 16px rgba(123, 47, 247, 0.2);
-  }
-  50% {
-    box-shadow:
-      0 0 12px rgba(255, 0, 110, 0.6),
-      0 0 24px rgba(123, 47, 247, 0.35);
-  }
+    0 0 6px rgba(224, 82, 122, 0.3),
+    0 0 12px rgba(99, 102, 179, 0.15);
 }
 
 /* Poker Simulator nav link (mobile) */
@@ -212,7 +198,7 @@
   bottom: 0;
   width: 280px;
   z-index: calc(var(--z-nav) - 1);
-  background: rgba(10, 10, 15, 0.95);
+  background: rgba(12, 12, 20, 0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-left: 1px solid var(--color-glass-border);

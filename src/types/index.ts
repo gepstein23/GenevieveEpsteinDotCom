@@ -34,7 +34,7 @@ export interface ExperienceItem {
 /** A skill with its category for the Tech Stack display. */
 export interface Skill {
   name: string
-  category: 'languages' | 'frameworks' | 'cloud' | 'tools'
+  category: 'languages' | 'tools-platforms'
   /** When true, the skill tag gets a special glow/accent treatment. */
   highlighted?: boolean
 }

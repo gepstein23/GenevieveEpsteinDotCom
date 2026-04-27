@@ -31,8 +31,8 @@
     transition: opacity var(--transition-base);
     /* Radial gradient centered on cursor position (set via JS) */
     background: radial-gradient(
-      300px circle at var(--glow-x) var(--glow-y),
-      rgba(255, 0, 110, 0.12),
+      200px circle at var(--glow-x) var(--glow-y),
+      rgba(224, 82, 122, 0.08),
       transparent 70%
     );
     pointer-events: none;

@@ -33,7 +33,7 @@ export default function AnimatedGradientOrb({
   top,
   left,
   right,
-  duration = 20,
+  duration = 30,
 }: AnimatedGradientOrbProps) {
   const prefersReduced = usePrefersReducedMotion()
 
