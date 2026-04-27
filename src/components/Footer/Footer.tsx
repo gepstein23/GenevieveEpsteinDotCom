@@ -2,6 +2,7 @@ import { content } from '@/data/content'
 import Logo from '@/components/Logo/Logo'
 import photo1 from '@/assets/linderpix-NU-KCCS-24916-web (1).jpg'
 import photo2 from '@/assets/linderpix-NU-KCCS-24962-web (1).jpg'
+import photo3 from '@/assets/fanduel.jpg'
 import styles from './Footer.module.scss'
 
 export default function Footer() {
@@ -20,6 +21,14 @@ export default function Footer() {
           <img
             src={photo2}
             alt={content.footer.photoAlts[1]}
+            className={styles.galleryImg}
+            loading="lazy"
+          />
+        </div>
+        <div className={styles.galleryItem}>
+          <img
+            src={photo3}
+            alt={content.footer.photoAlts[2]}
             className={styles.galleryImg}
             loading="lazy"
           />

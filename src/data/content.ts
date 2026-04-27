@@ -229,6 +229,7 @@ export const content = {
     photoAlts: [
       'Genevieve Epstein — professional photo 1',
       'Genevieve Epstein — professional photo 2',
+      'Genevieve Epstein — professional photo 3',
     ],
   },
 
