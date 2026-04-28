@@ -20,9 +20,9 @@ export const content = {
     greeting: "Hello, I'm",
     taglines: [
       'Senior Software Engineer',
-      'Technical Leader',
-      'Event-Driven Architecture',
-      'Fraud Detection Infrastructure',
+      'Mentor and Leader',
+      'Cloud-Native Engineer',
+      'Backend Systems Builder',
     ],
     ctaPrimary: 'View My Work',
     ctaSecondary: 'Get In Touch',
@@ -32,12 +32,12 @@ export const content = {
   about: {
     heading: 'About Me',
     bio: [
-      'Senior Software Engineer with 5+ years of experience designing and delivering high-throughput, event-driven systems on AWS. Proven track record in fraud detection infrastructure, real-time data pipelines, and cross-team technical leadership — reducing fraud, cost, and operational overhead at scale.',
+      'Senior Software Engineer specializing in large-scale backend systems and cloud-native infrastructure, with a proven record of delivering high-impact features on AWS that reduce fraud, cost, and operational overhead.',
       "When I'm not building or optimizing systems, nor busy on-call, you can find me playing cello, snowboarding, travelling, or deep in a tournament of Texas Hold 'Em.",
     ],
     interestsHeading: "When I'm not coding",
     interests: [
-      { emoji: '\u{1F3BB}', label: 'Orchestra (Cello & Viola)' },
+      { emoji: '\u{1F3BB}', label: 'Cello & Viola' },
       { emoji: '\u{1F3C2}', label: 'Snowboarding' },
       { emoji: '\u{1F5A8}\uFE0F', label: '3D Printing' },
       { emoji: '\u{1F6B4}', label: 'SoulCycle' },
@@ -57,7 +57,7 @@ export const content = {
         id: 'poker-high-hand',
         title: 'Poker High Hand Simulator',
         description:
-          'Optimizing High Hand poker promotions using Monte Carlo Tree Search. A memory-efficient Java simulation engine with a React UI, CI/CD pipeline via GitHub Actions, and WAF-secured AWS hosting on EC2 and Amplify.',
+          'Built and released a public Java simulation engine using MCTS to model and optimize poker high hand promotion structures, with custom card-playing mechanics and configurable parameters. Deployed full stack on AWS EC2 and AWS Amplify with a fully automated multi-env CI/CD pipeline and WAF-secured endpoints; actively maintained and updated.',
         techStack: ['Java', 'React', 'AWS EC2', 'AWS Amplify', 'MCTS'],
         sourceUrl: 'https://github.com/gepstein23/PokerHighHandSimulator',
         liveUrl: 'https://pokersim.genevieveepstein.com',
@@ -112,10 +112,10 @@ export const content = {
         companyUrl: 'https://www.fanduel.com',
         period: 'Jul 2024 — Present',
         description: [
-          'Designed and delivered real-time fraud detection pipelines on AWS and Confluent Kafka, resulting in 51,000+ fraudulent account suspensions and 3.45M+ hours of potential fraud prevented.',
-          'Built ML-powered decisioning services that automated analyst workflows, saving 1,500+ analyst hours annually while improving detection accuracy.',
-          'Executed 10+ emergency releases for time-sensitive fraud vectors, coordinating cross-team response and external vendor integrations under tight deadlines.',
-          'Redesigned a Flink streaming feature to cut costs by 98% and led microservices migration from monolith, improving deployment velocity and system resilience.',
+          'Designed and delivered real-time fraud detection pipelines on AWS and Confluent Kafka, resulting in 51,000+ fraudulent account suspensions, 3.45M+ hours of potential fraud prevented, and 1,500+ analyst hours saved annually.',
+          'Supported mission-critical, high-throughput withdrawal and login services sustaining 3,000+ reqs/sec; led a cross-org high-priority initiative introducing ML-decisioning into fraud workflows, reducing customer friction by 15%.',
+          'Functioned as technical lead across cross-team initiatives — coordinating vendor integrations, driving end-to-end observability, and executing 10+ emergency releases for time-critical compliance and business requests.',
+          'Reduced Flink streaming job infrastructure cost by 98% through architectural redesign; separately led migration from monolithic services to microservices including abstracting 3 shared algorithms into reusable internal libraries.',
         ],
       },
       {
@@ -125,10 +125,10 @@ export const content = {
         companyUrl: 'https://www.broadcom.com/vmware',
         period: 'Feb 2023 — Jul 2024',
         description: [
-          'Delivered multi-product rearchitecture spanning 3 teams, introducing 2 of 4 supported VM types and driving cross-team redesign of backup/failover management.',
-          'Built and launched an internal log parsing/querying tool adopted org-wide, significantly reducing debugging time across engineering.',
-          'Founded the API design guild and mentored 2 interns through full project lifecycles, establishing patterns adopted across the organization.',
-          'Developed 2 of 4 core VM cloning methods, improving performance by ~80% and reducing process time from days to hours.',
+          'Developed 2 of 4 core VM cloning methods, improving performance by ~80%, reducing process time from days to hours.',
+          'Introduced 2 of 4 supported VM types; one involving a multi-product rearchitecture of backup and failover management.',
+          'Designed and launched a log parsing and querying tool adopted org-wide, eliminating manual log analysis across engineering teams.',
+          'Supported cross-functional teams by triaging 5,000+ test failures, guiding API development as a member of the API guild, managing interns, and mentoring peers.',
         ],
       },
       {
@@ -170,6 +170,7 @@ export const content = {
     { name: 'AWS', category: 'tools-platforms' },
     { name: 'Lambda', category: 'tools-platforms' },
     { name: 'API Gateway', category: 'tools-platforms' },
+    { name: 'IAM', category: 'tools-platforms' },
     { name: 'SQS', category: 'tools-platforms' },
     { name: 'SNS', category: 'tools-platforms' },
     { name: 'EventBridge', category: 'tools-platforms' },
@@ -178,6 +179,7 @@ export const content = {
     { name: 'ECR', category: 'tools-platforms' },
     { name: 'ECS', category: 'tools-platforms' },
     { name: 'S3', category: 'tools-platforms' },
+    { name: 'X-Ray', category: 'tools-platforms' },
     { name: 'Confluent Kafka', category: 'tools-platforms' },
     { name: 'Flink', category: 'tools-platforms' },
     { name: 'Docker', category: 'tools-platforms' },

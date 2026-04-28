@@ -35,6 +35,7 @@ export interface ExperienceItem {
 export interface Skill {
   name: string
   category: 'languages' | 'tools-platforms'
+
   /** When true, the skill tag gets a special glow/accent treatment. */
   highlighted?: boolean
 }
